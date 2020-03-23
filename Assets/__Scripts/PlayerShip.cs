@@ -11,11 +11,11 @@ using Backtrace.Unity.Model;
 public class PlayerShip : MonoBehaviour
 {
     [Header("Set in Inspector")]
-    public float        shipSpeed = 10f;
+    public float shipSpeed = 10f;
 
     // This is a somewhat protected private singleton for PlayerShip
-    static private PlayerShip   _S;
-    static public PlayerShip    S
+    static private PlayerShip _S;
+    static public PlayerShip S
     {
         get
         {
@@ -31,8 +31,8 @@ public class PlayerShip : MonoBehaviour
         }
     }
 
-    Rigidbody           rigid;
-    public GameObject   bulletPrefab;
+    Rigidbody rigid;
+    public GameObject bulletPrefab;
 
     void Start()
     {
@@ -78,23 +78,90 @@ public class PlayerShip : MonoBehaviour
         go.transform.position = transform.position;
         go.transform.LookAt(mPos3D);
 
-         //Read from manager BacktraceClient instance
-        var backtraceClient = GetComponent<BacktraceClient>();
-        try 
-        {
-            throw new Exception("Fatal error drawing the bullet");
-        }
-        catch (Exception e)
-        {
-            var report = new BacktraceReport(e);
-            backtraceClient.Send(report);
-        }
-        
+        //Read from manager BacktraceClient instance
+        //var backtraceClient = GetComponent<BacktraceClient>();
+        // try
+        // {
+        //     throw new Exception("Fatal error drawing the bullet");
+        // }
+        // catch (Exception e)
+        // {
+        //     var report = new BacktraceReport(e);
+        //     backtraceClient.Send(report);
+        // }
 
-        Invoke("Fire", 0.1f);   
+        ThrowRandomException(mPos);
+
+        // fire again 50% of the times
+        if (Math.Round(mPos.x) % 2 == 0)
+        {
+            Invoke("Fire", 1);
+        }
     }
 
+    void ThrowRandomException(Vector3 mPos)
+    {
+        //Grab unhandled exceptions too
+        var backtraceClient = GetComponent<BacktraceClient>();
+        backtraceClient.HandleUnhandledExceptions();
 
+        var switchVar = Math.Round(mPos.x) % 4;
+        Debug.Log($"Switch argument: ${ switchVar }");
+        switch (switchVar)
+        {
+            case 0:
+                try
+                {
+                    Debug.Log("Okay, throwing a parameter cannot be null exception now.");
+                    throw new System.Exception("Parameter cannot be null");
+                }
+                catch (System.Exception e)
+                {
+                    var report = new BacktraceReport(
+                        exception: e,
+                        //Adding an attribute that will show in Backtrace
+                        //as "Testing" with a value of "True"
+                        attributes: new Dictionary<string, object>() { { "Testing", "True" } }
+                    );
+
+                    backtraceClient.Send(report);
+                }
+                break;
+            case 1:
+                try
+                {
+                    Console.WriteLine("Okay, throwing out of memory exception now.");
+                    throw new InsufficientMemoryException("Insuff mem.");
+                }
+                catch (InsufficientMemoryException e)
+                {
+                    var report = new BacktraceReport(e);
+                    backtraceClient.Send(report);
+                }
+                break;
+            case 2:
+                try
+                {
+                    Debug.Log("Throwing a file not found exception now.");
+                    System.IO.File.ReadAllBytes("Path to not existing file");
+                }
+                catch (Exception e)
+                {
+                    var report = new BacktraceReport(e);
+                    backtraceClient.Send(report);
+                }
+                break;
+            case 3:
+                {
+                    int x = 0;
+                    int y = 100 / x;
+                }
+                break;
+            default:
+                Debug.Log("Okay, bai!");
+                break;
+        }
+    }
     static public float MAX_SPEED
     {
         get
