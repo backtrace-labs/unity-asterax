@@ -78,18 +78,6 @@ public class PlayerShip : MonoBehaviour
         go.transform.position = transform.position;
         go.transform.LookAt(mPos3D);
 
-        //Read from manager BacktraceClient instance
-        //var backtraceClient = GetComponent<BacktraceClient>();
-        // try
-        // {
-        //     throw new Exception("Fatal error drawing the bullet");
-        // }
-        // catch (Exception e)
-        // {
-        //     var report = new BacktraceReport(e);
-        //     backtraceClient.Send(report);
-        // }
-
         ThrowRandomException(mPos);
 
         // fire again 50% of the times
@@ -130,7 +118,7 @@ public class PlayerShip : MonoBehaviour
             case 1:
                 try
                 {
-                    Console.WriteLine("Okay, throwing out of memory exception now.");
+                    Debug.Log("Okay, throwing out of memory exception now.");
                     throw new InsufficientMemoryException("Insuff mem.");
                 }
                 catch (InsufficientMemoryException e)
