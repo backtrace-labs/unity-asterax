@@ -25,7 +25,7 @@ MonoBehaviour:
   MaxDatabaseSize: 0
   RetryInterval: 60
   RetryLimit: 3
-  DestroyOnLoad: 0
+  DestroyOnLoad: 1
   GameObjectDepth: 0
   DeduplicationStrategy: 1
   RetryOrder: 0

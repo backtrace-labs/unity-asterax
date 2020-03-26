@@ -93,7 +93,7 @@ public class PlayerShip : MonoBehaviour
         var backtraceClient = GetComponent<BacktraceClient>();
         backtraceClient.HandleUnhandledExceptions();
 
-        var switchVar = Math.Round(mPos.x) % 4;
+        var switchVar = Math.Round(mPos.x) % 5;
         Debug.Log($"Switch argument: ${ switchVar }");
         switch (switchVar)
         {

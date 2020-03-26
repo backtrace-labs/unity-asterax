@@ -5,12 +5,23 @@ using UnityEngine;
 /// <summary>
 /// When a GameObject exits the bounds of the OnScreenBounds, screen wrap it.
 /// </summary>
+[RequireComponent(typeof(Collider))]
 public class OffScreenWrapper : MonoBehaviour
 {
+
+    void Start()
+    {
+        Debug.Log("OffScreenWrapper Start");   
+    }
 
     void Update()
     {
         // Adding an Update() method shows the "enabled" checkbox in the Inspector
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter - " + gameObject.name);
     }
 
     // This is called whenever this GameObject exits the bounds of OnScreenBounds

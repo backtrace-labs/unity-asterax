@@ -64,19 +64,17 @@ public class ScreenBounds : MonoBehaviour
         if (cam.orthographicSize != cachedOrthographicSize || cam.aspect != cachedAspect
             || cam.transform.localScale != cachedCamScale)
         {
-            Debug.Log("cam.transform.localScale:" + cam.transform.localScale);
-            Debug.Log("cam.aspect:" + cam.aspect);
-            cam.transform.localScale = CalculateScale();
-
-            cachedOrthographicSize = cam.orthographicSize;
-            cachedAspect = cam.aspect;
-            cachedCamScale = cam.transform.localScale;
+            transform.localScale = CalculateScale();
         }
     }
 
 
     private Vector3 CalculateScale()
     {
+        cachedOrthographicSize = cam.orthographicSize;
+        cachedAspect = cam.aspect;
+        cachedCamScale = cam.transform.localScale;
+
         Vector3 scaleDesired, scaleColl;
 
         scaleDesired.z = zScale;
@@ -89,6 +87,8 @@ public class ScreenBounds : MonoBehaviour
         //  debugging easier because you can see the value before it is returned.
         return scaleColl;
     }
+
+
 
 
 
