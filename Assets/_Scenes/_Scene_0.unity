@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Configuration: {fileID: 11400000, guid: 68c657025ca2c447785a23b8d149d4a4, type: 2}
+  MiniDumpType: 0
 --- !u!1 &781657951
 GameObject:
   m_ObjectHideFlags: 0

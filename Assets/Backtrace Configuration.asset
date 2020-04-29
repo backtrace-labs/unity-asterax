@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e908b13f7467f4185f3f45d43568c4, type: 3}
   m_Name: Backtrace Configuration
   m_EditorClassIdentifier: 
-  ServerUrl: https://submit.backtrace.io/bt-unity-demo/3539bc8b94896f5cbf33e5a8d7bbc9499cada9f5c4603ae3538a9e4786423ef9/json
+  ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
   ReportPerMin: 0
   HandleUnhandledExceptions: 1
   IgnoreSslValidation: 1
+  MinidumpType: 1
   DatabasePath: 
   Enabled: 0
   AutoSendMode: 1
@@ -25,7 +26,7 @@ MonoBehaviour:
   MaxDatabaseSize: 0
   RetryInterval: 60
   RetryLimit: 3
-  DestroyOnLoad: 1
+  DestroyOnLoad: 0
   GameObjectDepth: 0
   DeduplicationStrategy: 1
   RetryOrder: 0

@@ -78,22 +78,10 @@ public class PlayerShip : MonoBehaviour
         go.transform.position = transform.position;
         go.transform.LookAt(mPos3D);
 
-        ThrowRandomException(mPos);
-
-        // fire again 50% of the times
-        if (Math.Round(mPos.x) % 2 == 0)
-        {
-            Invoke("Fire", 1);
-        }
-    }
-
-    void ThrowRandomException(Vector3 mPos)
-    {
         //Grab unhandled exceptions too
         var backtraceClient = GetComponent<BacktraceClient>();
-        backtraceClient.HandleUnhandledExceptions();
 
-        var switchVar = Math.Round(mPos.x) % 5;
+        var switchVar = UnityEngine.Random.Range(0, 4);
         Debug.Log($"Switch argument: ${ switchVar }");
         switch (switchVar)
         {
@@ -147,6 +135,7 @@ public class PlayerShip : MonoBehaviour
                 break;
             default:
                 Debug.Log("Okay, bai!");
+                Invoke("Fire", 1);
                 break;
         }
     }
