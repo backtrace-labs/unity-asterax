@@ -1,0 +1,12 @@
+{
+"companyName": "Jeremy Bond",
+"productName": "AsteraX – Jeremy Bond",
+"dataUrl": "game-dev7.data.unityweb",
+"wasmCodeUrl": "game-dev7.wasm.code.unityweb",
+"wasmFrameworkUrl": "game-dev7.wasm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
