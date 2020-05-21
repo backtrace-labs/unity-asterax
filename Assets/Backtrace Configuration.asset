@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
-  ReportPerMin: 0
+  ReportPerMin: 1
   HandleUnhandledExceptions: 1
   IgnoreSslValidation: 1
   MinidumpType: 1

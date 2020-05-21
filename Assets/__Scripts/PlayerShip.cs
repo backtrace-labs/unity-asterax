@@ -60,7 +60,7 @@ public class PlayerShip : MonoBehaviour
         rigid.velocity = vel * shipSpeed;
 
         // Mouse input for firing
-        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+        if (CrossPlatformInputManager.GetButtonDown("Fire1") || Input.touchCount > 0)
         {
             Fire();
         }

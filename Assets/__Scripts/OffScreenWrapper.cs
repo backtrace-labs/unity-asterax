@@ -11,7 +11,7 @@ public class OffScreenWrapper : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("OffScreenWrapper Start");   
+        //Debug.Log("OffScreenWrapper Start");   
     }
 
     void Update()
@@ -21,13 +21,13 @@ public class OffScreenWrapper : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter - " + gameObject.name);
+        //Debug.Log("OnTriggerEnter - " + gameObject.name);
     }
 
     // This is called whenever this GameObject exits the bounds of OnScreenBounds
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnTriggerExit");
+        //Debug.Log("OnTriggerExit");
         // NOTE: OnTriggerExit is still called when this.enabled==false, so I've
         //  added this to stop wrapping when enabled is unchecked in the Inspector
         if (!enabled)
