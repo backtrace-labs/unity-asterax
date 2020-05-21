@@ -67,12 +67,6 @@ public class Asteroid : MonoBehaviour
         rigid.angularVelocity = Random.insideUnitSphere * this.maxAngularVel;
     }
 
-    public void Explode(GameObject gameObject) {
-        ParticleSystem exp = gameObject.GetComponent<ParticleSystem>();
-        exp.Play();
-        //Destroy(gameObject, exp.main.duration);
-    }
-
     public void OnCollisionEnter(Collision coll)
     {
         if (immune)
@@ -85,13 +79,16 @@ public class Asteroid : MonoBehaviour
         if (otherGO.tag == "Bullet")
         {
             Destroy(otherGO);
+            Destroy(gameObject);
         }
+        else if (otherGO.tag == "Player") 
+        {
+            Destroy(gameObject);
+        }  
         else if (otherGO.tag == "Asteroid") 
         {
-            Explode(otherGO);
+            //Destroy(otherGO);
             //Destroy(gameObject);
-        }
-
-        Explode(gameObject);
+        }        
     }
 }
