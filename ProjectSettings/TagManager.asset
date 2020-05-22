@@ -45,3 +45,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: HUD
+    uniqueID: 3017752413
+    locked: 0

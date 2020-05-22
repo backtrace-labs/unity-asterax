@@ -80,10 +80,16 @@ public class Asteroid : MonoBehaviour
         {
             Destroy(otherGO);
             Destroy(gameObject);
+            PlayerShip.S.bullets += 5;
         }
-        else if (otherGO.tag == "Player") 
+        else if (otherGO.tag == "Player")
         {
             Destroy(gameObject);
+            PlayerShip.S.health -= 5;
+
+            if (PlayerShip.S.health <= 0) {
+                Destroy(otherGO);
+            }
         }  
         else if (otherGO.tag == "Asteroid") 
         {

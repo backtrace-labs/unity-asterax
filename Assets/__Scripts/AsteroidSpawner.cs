@@ -5,7 +5,7 @@ using UnityEngine;
  
      void Start()
      {
-          SpawnAsteroids(25);
+          SpawnAsteroids(100);
      }
      
      private void SpawnAsteroids(int amount) 

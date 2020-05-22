@@ -7,7 +7,6 @@ using Backtrace.Unity;
 using Backtrace.Unity.Model;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(BacktraceClient))]
 public class PlayerShip : MonoBehaviour
 {
     [Header("Set in Inspector")]
@@ -34,6 +33,9 @@ public class PlayerShip : MonoBehaviour
     Rigidbody rigid;
     public GameObject bulletPrefab;
 
+    public int health = 100;
+
+    public int bullets = 100;
     void Start()
     {
         S = this;
@@ -68,6 +70,10 @@ public class PlayerShip : MonoBehaviour
 
     void Fire()
     {
+        if (this.bullets <= 0) {
+            return;
+        }
+
         // Get direction to the mouse
         Vector3 mPos = Input.mousePosition;
         mPos.z = -Camera.main.transform.position.z;
@@ -78,8 +84,10 @@ public class PlayerShip : MonoBehaviour
         go.transform.position = transform.position;
         go.transform.LookAt(mPos3D);
 
+        this.bullets -= 1;
+
         //Grab unhandled exceptions too
-        var backtraceClient = GetComponent<BacktraceClient>();
+        var backtraceClient = AsteraX.GetBacktraceClient();
 
         var switchVar = UnityEngine.Random.Range(0, 4);
         Debug.Log($"Switch argument: ${ switchVar }");
@@ -134,8 +142,7 @@ public class PlayerShip : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Okay, bai!");
-                Invoke("Fire", 1);
+                Debug.Log("No error.");
                 break;
         }
     }

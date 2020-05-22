@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeaef21edfccc476d918b915bd85cac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 3
+  size: 5
   immune: 0
-  minVel: 5
-  maxVel: 10
-  maxAngularVel: 10
+  minVel: 10
+  maxVel: 25
+  maxAngularVel: 100
