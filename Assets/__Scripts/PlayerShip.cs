@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
@@ -86,17 +85,12 @@ public class PlayerShip : MonoBehaviour
 
         this.bullets -= 1;
 
-        //Grab unhandled exceptions too
-        var backtraceClient = AsteraX.GetBacktraceClient();
-
-        var switchVar = UnityEngine.Random.Range(0, 4);
-        Debug.Log($"Switch argument: ${ switchVar }");
+        var switchVar = Random.Range(0, 4);
         switch (switchVar)
         {
             case 0:
                 try
                 {
-                    Debug.Log("Okay, throwing a parameter cannot be null exception now.");
                     throw new System.Exception("Parameter cannot be null");
                 }
                 catch (System.Exception e)
@@ -105,41 +99,20 @@ public class PlayerShip : MonoBehaviour
                         exception: e,
                         //Adding an attribute that will show in Backtrace
                         //as "Testing" with a value of "True"
-                        attributes: new Dictionary<string, object>() { { "Testing", "True" } }
+                        attributes: new Dictionary<string, object>() { { "ParameterKey", "ParameterValue" } }
                     );
 
-                    backtraceClient.Send(report);
+                    AsteraX.GetBacktraceClient().Send(report);
                 }
                 break;
             case 1:
-                try
-                {
-                    Debug.Log("Okay, throwing out of memory exception now.");
-                    throw new InsufficientMemoryException("Insuff mem.");
-                }
-                catch (InsufficientMemoryException e)
-                {
-                    var report = new BacktraceReport(e);
-                    backtraceClient.Send(report);
-                }
-                break;
+                throw new System.InsufficientMemoryException("Insuff mem.");
             case 2:
-                try
-                {
-                    Debug.Log("Throwing a file not found exception now.");
-                    System.IO.File.ReadAllBytes("Path to not existing file");
-                }
-                catch (Exception e)
-                {
-                    var report = new BacktraceReport(e);
-                    backtraceClient.Send(report);
-                }
+                System.IO.File.ReadAllBytes("Path to not existing file");
                 break;
             case 3:
-                {
-                    int x = 0;
-                    int y = 100 / x;
-                }
+                int x = 0;
+                int y = 100 / x;
                 break;
             default:
                 Debug.Log("No error.");
