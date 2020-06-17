@@ -1,0 +1,13 @@
+{
+"companyName": "Backtrace.io",
+"productName": "AsteraX",
+"dataUrl": "wegbl.data.unityweb",
+"wasmCodeUrl": "wegbl.wasm.code.unityweb",
+"wasmFrameworkUrl": "wegbl.wasm.framework.unityweb",
+"wasmSymbolsUrl": "wegbl.wasm.symbols.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
