@@ -2,10 +2,12 @@ using UnityEngine;
  public class AsteroidSpawner : MonoBehaviour
  {
      public GameObject[] AsteroidPrefabs;
+
+     public int numberOfAsteroids;
  
      void Start()
      {
-          SpawnAsteroids(100);
+          SpawnAsteroids(numberOfAsteroids);
      }
      
      private void SpawnAsteroids(int amount) 

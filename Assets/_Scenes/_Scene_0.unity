@@ -610,6 +610,7 @@ MonoBehaviour:
   - {fileID: 1029653053436338, guid: 1293b0763d7d344e0b908c097078ac09, type: 3}
   - {fileID: 1669921439223048, guid: 5513cde93bb3343768ced35921a9c3c2, type: 3}
   - {fileID: 1317570492134680, guid: a6d3ccfc58a1f41368479aabb6050561, type: 3}
+  numberOfAsteroids: 100
 --- !u!4 &1757641738
 Transform:
   m_ObjectHideFlags: 0
