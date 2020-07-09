@@ -23,6 +23,11 @@ public class IncrementBuildNumber : IPreprocessBuildWithReport
             {
                 Debug.LogError("Failed to parse build number " + PlayerSettings.iOS.buildNumber + " as int.");
             }
+        } 
+        else if (report.summary.platform == BuildTarget.Android)
+        {
+            PlayerSettings.Android.bundleVersionCode = PlayerSettings.Android.bundleVersionCode + 1;
+            Debug.Log("Set new Android build number to " + PlayerSettings.Android.bundleVersionCode);
         }
     }
 }

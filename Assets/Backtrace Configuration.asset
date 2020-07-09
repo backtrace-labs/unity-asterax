@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
-  ReportPerMin: 1
+  ReportPerMin: 100
   HandleUnhandledExceptions: 1
-  IgnoreSslValidation: 1
+  IgnoreSslValidation: 0
+  DestroyOnLoad: 0
+  GameObjectDepth: 3
+  NumberOfLogs: 10
+  SendUnhandledGameCrashesOnGameStartup: 1
+  HandleANR: 1
+  DeduplicationStrategy: 1
+  UseNormalizedExceptionMessage: 1
   MinidumpType: 1
-  DatabasePath: 
-  Enabled: 0
+  GenerateScreenshotOnException: 1
+  DatabasePath: ${Application.persistentDataPath}/.backtraceio/
+  Enabled: 1
+  AddUnityLogToReport: 0
   AutoSendMode: 1
-  CreateDatabase: 0
+  CreateDatabase: 1
   MaxRecordCount: 0
   MaxDatabaseSize: 0
   RetryInterval: 60
   RetryLimit: 3
-  DestroyOnLoad: 0
-  GameObjectDepth: 0
-  DeduplicationStrategy: 1
   RetryOrder: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(OffScreenWrapper))]
@@ -88,6 +89,7 @@ public class Asteroid : MonoBehaviour
             PlayerShip.S.health -= 5;
 
             if (PlayerShip.S.health <= 0) {
+                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
                 Destroy(otherGO);
             }
         }  

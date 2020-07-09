@@ -96,10 +96,7 @@ public class PlayerShip : MonoBehaviour
                 catch (System.Exception e)
                 {
                     var report = new BacktraceReport(
-                        exception: e,
-                        //Adding an attribute that will show in Backtrace
-                        //as "Testing" with a value of "True"
-                        attributes: new Dictionary<string, object>() { { "ParameterKey", "ParameterValue" } }
+                        exception: e
                     );
 
                     AsteraX.GetBacktraceClient().Send(report);

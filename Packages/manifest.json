@@ -6,7 +6,7 @@
     "com.unity.package-manager-ui": "2.0.8",
     "com.unity.purchasing": "2.0.3",
     "com.unity.textmeshpro": "1.4.1",
-    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#82bb69f4f95dd0e9138f67f62f82ac1b51618455",
+    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#9f298881bb070a7da8ac748a0fe701b45becc4c8",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -40,8 +40,8 @@
   },
   "lock": {
     "io.backtrace.unity": {
-      "revision": "82bb69f4f95dd0e9138f67f62f82ac1b51618455",
-      "hash": "82bb69f4f95dd0e9138f67f62f82ac1b51618455"
+      "revision": "9f298881bb070a7da8ac748a0fe701b45becc4c8",
+      "hash": "9f298881bb070a7da8ac748a0fe701b45becc4c8"
     }
   }
 }
