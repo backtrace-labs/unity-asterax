@@ -18,10 +18,13 @@ MonoBehaviour:
   HandleUnhandledExceptions: 1
   IgnoreSslValidation: 0
   DestroyOnLoad: 0
+  ReportFilterType: 0
   GameObjectDepth: 3
   NumberOfLogs: 10
+  PerformanceStatistics: 0
   SendUnhandledGameCrashesOnGameStartup: 1
   HandleANR: 1
+  CaptureNativeCrashes: 1
   DeduplicationStrategy: 1
   UseNormalizedExceptionMessage: 1
   MinidumpType: 1
