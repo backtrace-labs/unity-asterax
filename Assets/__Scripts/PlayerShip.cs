@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.InputSystem;
 using Backtrace.Unity;
 using Backtrace.Unity.Model;
 
@@ -10,6 +12,10 @@ public class PlayerShip : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public float shipSpeed = 10f;
+
+    [DllImport("kernel32.dll")]
+    static extern void RaiseException(uint dwExceptionCode, uint dwExceptionFlags,  uint nNumberOfArguments, IntPtr lpArguments);
+
 
     // This is a somewhat protected private singleton for PlayerShip
     static private PlayerShip _S;
@@ -34,7 +40,7 @@ public class PlayerShip : MonoBehaviour
 
     public int health = 100;
 
-    public int bullets = 100;
+    public int bullets;
     void Start()
     {
         S = this;
@@ -44,31 +50,32 @@ public class PlayerShip : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnFire()
+    {
+        Debug.Log("OnFire");
+        Fire();
+    }
+
+    public void OnMove(InputValue value)
     {
         // Using Horizontal and Vertical axes to set velocity
-        float aX = CrossPlatformInputManager.GetAxis("Horizontal");
-        float aY = CrossPlatformInputManager.GetAxis("Vertical");
+        Vector2 vel = value.Get<Vector2>();
 
-        Vector3 vel = new Vector3(aX, aY);
         if (vel.magnitude > 1)
         {
-            // Avoid speed multiplying by 1.414 when moving at a diagonal
+            //Avoid speed multiplying by 1.414 when moving at a diagonal
             vel.Normalize();
         }
 
         rigid.velocity = vel * shipSpeed;
 
         // Mouse input for firing
-        if (CrossPlatformInputManager.GetButtonDown("Fire1") || Input.touchCount > 0)
-        {
-            Fire();
-        }
+
     }
 
     void Fire()
     {
+        Debug.Log("OnFire");
         if (this.bullets <= 0) {
             return;
         }
@@ -85,7 +92,7 @@ public class PlayerShip : MonoBehaviour
 
         this.bullets -= 1;
 
-        var switchVar = Random.Range(0, 4);
+        var switchVar = UnityEngine.Random.Range(0, 4);
         switch (switchVar)
         {
             case 0:
