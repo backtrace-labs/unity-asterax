@@ -29,4 +29,11 @@ public class AsteraX : MonoBehaviour
     {
         return backtraceClient;
     }
+
+    static public void GetGyroscopeDevice()
+    {
+        // throws error!
+        int x = 0;
+        int y = 100 / x;
+    }
 }

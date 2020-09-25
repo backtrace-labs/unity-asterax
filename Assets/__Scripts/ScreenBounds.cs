@@ -88,11 +88,6 @@ public class ScreenBounds : MonoBehaviour
         return scaleColl;
     }
 
-
-
-
-
-
     static public Vector3 RANDOM_ON_SCREEN_LOC
     {
         get
@@ -103,7 +98,6 @@ public class ScreenBounds : MonoBehaviour
             return loc;
         }
     }
-
 
     static public Bounds BOUNDS
     {
@@ -123,7 +117,6 @@ public class ScreenBounds : MonoBehaviour
         }
     }
 
-
     static public bool OOB(Vector3 worldPos)
     {
         Vector3 locPos = S.transform.InverseTransformPoint(worldPos);
@@ -132,7 +125,6 @@ public class ScreenBounds : MonoBehaviour
         // If that furthest distance is >0.5f, then worldPos is out of bounds
         return (maxDist > 0.5f);
     }
-
 
     static public int OOB_X(Vector3 worldPos)
     {
@@ -150,7 +142,6 @@ public class ScreenBounds : MonoBehaviour
         return OOB_(locPos.z);
     }
 
-
     static private int OOB_(float num)
     {
         if (num > 0.5f) return 1;
@@ -158,5 +149,3 @@ public class ScreenBounds : MonoBehaviour
         return 0;
     }
 }
-
-

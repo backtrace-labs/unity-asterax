@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using Backtrace.Unity;
+using Backtrace.Unity.Model;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(OffScreenWrapper))]
@@ -79,9 +81,7 @@ public class Asteroid : MonoBehaviour
 
         if (otherGO.tag == "Bullet")
         {
-            Destroy(otherGO);
-            Destroy(gameObject);
-            PlayerShip.S.bullets += 5;
+            AsteroidHitByBullet(otherGO);
         }
         else if (otherGO.tag == "Player")
         {
@@ -89,8 +89,8 @@ public class Asteroid : MonoBehaviour
             PlayerShip.S.health -= 5;
 
             if (PlayerShip.S.health <= 0) {
-                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
                 Destroy(otherGO);
+                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
             }
         }  
         else if (otherGO.tag == "Asteroid") 
@@ -98,5 +98,25 @@ public class Asteroid : MonoBehaviour
             //Destroy(otherGO);
             //Destroy(gameObject);
         }        
+    }
+
+    void AsteroidHitByBullet(GameObject otherGO)
+    {
+        Destroy(otherGO);
+        Destroy(gameObject);
+        PlayerShip.S.bullets += 2;
+
+        try
+        {
+            throw new System.Exception("Parameter cannot be null");
+        }
+        catch (System.Exception e)
+        {
+            var report = new BacktraceReport(
+                exception: e
+            );
+
+            AsteraX.GetBacktraceClient().Send(report);
+        }
     }
 }

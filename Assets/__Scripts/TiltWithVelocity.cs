@@ -29,8 +29,29 @@ public class TiltWithVelocity : MonoBehaviour
             prevDegrees = degrees;
             tan = Mathf.Tan(Mathf.Deg2Rad * degrees);
         }
-        Vector3 pitchDir = (tiltTowards) ? -rigid.velocity : rigid.velocity;
+        transform.LookAt(transform.position + CalculatePitchDirection());
+    }
+
+    private Vector3 CalculatePitchDirection()
+    {
+        Vector3 pitchDir = (this.tiltTowards) ? -this.rigid.velocity : this.rigid.velocity;
         pitchDir += Vector3.forward / tan * PlayerShip.MAX_SPEED;
-        transform.LookAt(transform.position + pitchDir);
+
+        if (pitchDir.x > 9f)
+        {
+            CalculateOverrideCoordinates();
+        }
+
+        return pitchDir;
+    }
+
+    void CalculateOverrideCoordinates()
+    {
+        CompensateForGyroscopeDrift();
+    }
+
+    void CompensateForGyroscopeDrift()
+    {
+        PlayerShip.GyroscopeDelta();
     }
 }
