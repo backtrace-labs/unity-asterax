@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using Backtrace.Unity;
 using Backtrace.Unity.Model;
 
@@ -12,10 +12,6 @@ public class PlayerShip : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public float shipSpeed = 10f;
-
-    [DllImport("kernel32.dll")]
-    static extern void RaiseException(uint dwExceptionCode, uint dwExceptionFlags,  uint nNumberOfArguments, IntPtr lpArguments);
-
 
     // This is a somewhat protected private singleton for PlayerShip
     static private PlayerShip _S;
@@ -48,6 +44,17 @@ public class PlayerShip : MonoBehaviour
         // NOTE: We don't need to check whether or not rigid is null because of 
         //  [RequireComponent( typeof(Rigidbody) )] above
         rigid = GetComponent<Rigidbody>();
+
+        if (UnityEngine.InputSystem.Gyroscope.current != null)
+        {
+            Debug.Log("Gyro enabling..");
+            InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+            Debug.Log("Gyro enabled.");
+        }
+        else
+        {
+            Debug.Log("No Gyro.");
+        }
     }
 
     public void OnFire()
@@ -58,19 +65,19 @@ public class PlayerShip : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        // Using Horizontal and Vertical axes to set velocity
         Vector2 vel = value.Get<Vector2>();
-
-        if (vel.magnitude > 1)
-        {
-            //Avoid speed multiplying by 1.414 when moving at a diagonal
-            vel.Normalize();
-        }
+        Debug.Log("OnMove" + vel);
 
         rigid.velocity = vel * shipSpeed;
+    }
 
-        // Mouse input for firing
-
+    void Update() 
+    {
+        if (UnityEngine.InputSystem.Gyroscope.current != null) 
+        {
+            Vector3 vel = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
+            rigid.velocity = vel * shipSpeed;
+        }
     }
 
     void Fire()
@@ -84,7 +91,7 @@ public class PlayerShip : MonoBehaviour
         Vector3 mPos = Input.mousePosition;
         mPos.z = -Camera.main.transform.position.z;
         Vector3 mPos3D = Camera.main.ScreenToWorldPoint(mPos);
-
+    
         // Instantiate the Bullet and set its direction
         GameObject go = Instantiate<GameObject>(bulletPrefab);
         go.transform.position = transform.position;
