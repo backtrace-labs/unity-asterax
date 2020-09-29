@@ -36,22 +36,6 @@ public class TiltWithVelocity : MonoBehaviour
     {
         Vector3 pitchDir = (this.tiltTowards) ? -this.rigid.velocity : this.rigid.velocity;
         pitchDir += Vector3.forward / tan * PlayerShip.MAX_SPEED;
-
-        if (pitchDir.x > 9f)
-        {
-            CalculateOverrideCoordinates();
-        }
-
         return pitchDir;
-    }
-
-    void CalculateOverrideCoordinates()
-    {
-        CompensateForGyroscopeDrift();
-    }
-
-    void CompensateForGyroscopeDrift()
-    {
-        PlayerShip.GyroscopeDelta();
     }
 }

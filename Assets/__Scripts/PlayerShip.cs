@@ -99,7 +99,7 @@ public class PlayerShip : MonoBehaviour
 
     void SpawnBullet(Vector3 mPos3D)
     {
-        Debug.Log(GameObject.FindGameObjectsWithTag("Bullet").Length);
+        // crash it!
         if (GameObject.FindGameObjectsWithTag("Bullet").Length > 2)
         {
             throw new System.InsufficientMemoryException("Insuff mem.");
@@ -114,6 +114,7 @@ public class PlayerShip : MonoBehaviour
     {
         AsteraX.GetGyroscopeDevice();
     }
+
     static public float MAX_SPEED
     {
         get

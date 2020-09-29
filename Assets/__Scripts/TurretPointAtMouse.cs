@@ -40,7 +40,6 @@ public class TurretPointAtMouse : MonoBehaviour
         transform.LookAt(mousePoint3D, Vector3.back);
     }
 
-
 #if DEBUG_TurretPointAtMouse_DrawMousePoint
     private void OnDrawGizmos()
     {

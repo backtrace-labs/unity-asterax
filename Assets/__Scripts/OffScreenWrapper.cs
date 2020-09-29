@@ -73,8 +73,7 @@ public class OffScreenWrapper : MonoBehaviour
         {
             relativeLoc.y *= -1;
         }
+
         transform.position = bounds.transform.TransformPoint(relativeLoc);
-
     }
-
 }

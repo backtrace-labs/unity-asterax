@@ -128,6 +128,7 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -174,7 +175,7 @@ PlayerSettings:
     Standalone: io.backtrace.asterax
     iPhone: io.backtrace.asterax
   buildNumber:
-    iPhone: 55
+    iPhone: 64
   AndroidBundleVersionCode: 47
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0

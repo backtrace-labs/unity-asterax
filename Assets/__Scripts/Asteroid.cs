@@ -106,17 +106,6 @@ public class Asteroid : MonoBehaviour
         Destroy(gameObject);
         PlayerShip.S.bullets += 2;
 
-        try
-        {
-            throw new System.Exception("Parameter cannot be null");
-        }
-        catch (System.Exception e)
-        {
-            var report = new BacktraceReport(
-                exception: e
-            );
-
-            AsteraX.GetBacktraceClient().Send(report);
-        }
+        throw new System.NullReferenceException("Parameter cannot be null");
     }
 }

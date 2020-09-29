@@ -33,7 +33,16 @@ public class Bullet : MonoBehaviour
 
     void DestroyMe()
     {
+        CalculateOverrideCoordinates();
         Destroy(gameObject);
     }
-    
+    void CalculateOverrideCoordinates()
+    {
+        CompensateForGyroscopeDrift();
+    }
+
+    void CompensateForGyroscopeDrift()
+    {
+        PlayerShip.GyroscopeDelta();
+    }    
 }

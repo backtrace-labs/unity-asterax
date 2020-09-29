@@ -11,6 +11,8 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
+
+        Debug.Log("backtrace_url: " + PlayerPrefs.GetString("backtrace_url"));
     }
 
     // Start is called before the first frame update
@@ -35,5 +37,7 @@ public class AsteraX : MonoBehaviour
         // throws error!
         int x = 0;
         int y = 100 / x;
+        // iOS allows you to divide by zero, cool huh? But crash anyways pls
+        throw new System.DivideByZeroException("Attempted to divide by zero");
     }
 }
