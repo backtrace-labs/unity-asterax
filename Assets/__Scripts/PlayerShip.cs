@@ -39,6 +39,15 @@ public class PlayerShip : MonoBehaviour
     {
         S = this;
 
+        // GetInt doesn't work reliably on iOS so revert to GetString
+        String shipHealthFromPrefs = PlayerPrefs.GetString("ship_health");
+        if (!String.IsNullOrWhiteSpace(shipHealthFromPrefs))
+        {
+            Debug.Log("ship health from playerprefs: " + shipHealthFromPrefs);
+            PlayerShip.S.health = Int32.Parse(shipHealthFromPrefs);
+        }
+        
+
         // NOTE: We don't need to check whether or not rigid is null because of 
         //  [RequireComponent( typeof(Rigidbody) )] above
         rigid = GetComponent<Rigidbody>();

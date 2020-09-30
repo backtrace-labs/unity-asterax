@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 1757641737}
   - component: {fileID: 1757641739}
   - component: {fileID: 1757641740}
+  - component: {fileID: 1757641741}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -693,6 +694,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3741202a3a104a69836c48e84f91648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1757641741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757641736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8073cb8663e5dff40aae45bd51b77a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Configuration: {fileID: 0}
 --- !u!1 &1776426976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1194270976900878, guid: 2c350f2ea6d36435b8b50bf6e3c429cb,
@@ -958,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 3148766061316803528, guid: 2c350f2ea6d36435b8b50bf6e3c429cb,
         type: 3}
       propertyPath: health
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c350f2ea6d36435b8b50bf6e3c429cb, type: 3}

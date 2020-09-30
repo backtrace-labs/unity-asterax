@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Backtrace.Unity;
@@ -12,6 +13,13 @@ public class AsteraX : MonoBehaviour
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
 
+        if (String.IsNullOrWhiteSpace(PlayerPrefs.GetString("backtrace_url")))
+        {
+            PlayerPrefs.SetString("backtrace_url", AsteraX.backtraceClient.Configuration.ServerUrl);
+            PlayerPrefs.Save();
+        }
+        
+        AsteraX.backtraceClient.Configuration.ServerUrl = PlayerPrefs.GetString("backtrace_url");
         Debug.Log("backtrace_url: " + PlayerPrefs.GetString("backtrace_url"));
     }
 

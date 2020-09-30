@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e908b13f7467f4185f3f45d43568c4, type: 3}
   m_Name: Backtrace Configuration
   m_EditorClassIdentifier: 
-  ServerUrl: http://cd03.sp.backtrace.io:6097/post?token=03cc992965fe949b5d43218be8a3b3bbb759ead683de6077d53f97583273d3f0&format=json
+  ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
   ReportPerMin: 100
   HandleUnhandledExceptions: 1
@@ -23,9 +23,6 @@ MonoBehaviour:
   NumberOfLogs: 10
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
-  HandleANR: 1
-  CaptureNativeCrashes: 1
-  SymbolsUploadToken: 2d22bf089f8e60136e025ba5ad28ff51a98a6f7a48d59c340683aeda972cf6d1
   DeduplicationStrategy: 1
   UseNormalizedExceptionMessage: 1
   MinidumpType: 1
