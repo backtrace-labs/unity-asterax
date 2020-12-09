@@ -23,13 +23,14 @@ MonoBehaviour:
   NumberOfLogs: 10
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
+  CaptureNativeCrashes: 1
   DeduplicationStrategy: 1
   UseNormalizedExceptionMessage: 1
   MinidumpType: 1
   GenerateScreenshotOnException: 1
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   Enabled: 1
-  AddUnityLogToReport: 0
+  AddUnityLogToReport: 1
   AutoSendMode: 1
   CreateDatabase: 1
   MaxRecordCount: 0

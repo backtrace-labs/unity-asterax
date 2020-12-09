@@ -136,7 +136,6 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -183,7 +182,7 @@ PlayerSettings:
     Standalone: io.backtrace.asterax
     iPhone: io.backtrace.asterax
   buildNumber:
-    iPhone: 78
+    iPhone: 88
   AndroidBundleVersionCode: 51
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
@@ -774,6 +773,7 @@ PlayerSettings:
     iPhone: 1
   scriptingBackend:
     Android: 1
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

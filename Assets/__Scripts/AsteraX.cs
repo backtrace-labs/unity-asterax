@@ -8,10 +8,19 @@ using Backtrace.Unity;
 public class AsteraX : MonoBehaviour
 {
     static private BacktraceClient backtraceClient;
+
+    static private int incrementingNumber = 0;
     
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
+
+        backtraceClient.BeforeSend =
+            (Backtrace.Unity.Model.BacktraceData model) =>
+            {
+                model.Attributes.Attributes.Add("customAttributeFromBeforeSend", "IncrementingNumber" + incrementingNumber++);
+                return model;
+            };
 
         if (String.IsNullOrWhiteSpace(PlayerPrefs.GetString("backtrace_url")))
         {
