@@ -12,12 +12,12 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "517b40554fd2f09f27b90abaf493deeb92450c53";
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
             {
                 model.Attributes.Attributes.Add("customAttributeFromBeforeSend", "IncrementingNumber" + incrementingNumber++);
-                model.Attributes.Attributes.Add("backtrace-unity-commit-sha", "517b40554fd2f09f27b90abaf493deeb92450c53");
                 return model;
             };
 
