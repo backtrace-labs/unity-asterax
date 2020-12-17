@@ -182,8 +182,8 @@ PlayerSettings:
     Standalone: io.backtrace.asterax
     iPhone: io.backtrace.asterax
   buildNumber:
-    iPhone: 88
-  AndroidBundleVersionCode: 51
+    iPhone: 89
+  AndroidBundleVersionCode: 53
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
