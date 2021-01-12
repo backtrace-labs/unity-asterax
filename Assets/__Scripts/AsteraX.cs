@@ -52,8 +52,10 @@ public class AsteraX : MonoBehaviour
     {
         // throws error!
         int x = 0;
+
         int y = 100 / x;
         // iOS allows you to divide by zero, cool huh? But crash anyways pls
         throw new System.DivideByZeroException("Attempted to divide by zero");
+        
     }
 }

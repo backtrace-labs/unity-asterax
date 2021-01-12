@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Diagnostics;
 using Backtrace.Unity;
 using Backtrace.Unity.Model;
-
+using System.Threading;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(OffScreenWrapper))]
 public class Asteroid : MonoBehaviour

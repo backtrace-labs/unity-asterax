@@ -38,11 +38,17 @@ public class Bullet : MonoBehaviour
     }
     void CalculateOverrideCoordinates()
     {
-        CompensateForGyroscopeDrift();
+        if (lifeTime == 2)
+        {
+            CompensateForGyroscopeDrift();
+        }
     }
 
     void CompensateForGyroscopeDrift()
     {
-        PlayerShip.GyroscopeDelta();
+        if (bulletSpeed == 20)
+        {
+            PlayerShip.GyroscopeDelta();
+        }
     }    
 }
