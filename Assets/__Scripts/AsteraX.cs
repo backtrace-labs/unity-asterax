@@ -12,11 +12,17 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
+        // static property, set once
+        // but you want to include something even if native crashes occur
+        // still works! Let me demonstrate.
         AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "517b40554fd2f09f27b90abaf493deeb92450c53";
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
             {
+                // this call back is only called for C# exceptions
+                // and ANRs as well (I'm fairly sure, let's find out)
+                // but not native crashes obviously
                 model.Attributes.Attributes.Add("customAttributeFromBeforeSend", "IncrementingNumber" + incrementingNumber++);
                 return model;
             };
