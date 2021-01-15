@@ -24,10 +24,9 @@ MonoBehaviour:
   NumberOfLogs: 10
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
-  CaptureNativeCrashes: 1
-  DeduplicationStrategy: -1
+  DeduplicationStrategy: 0
   UseNormalizedExceptionMessage: 1
-  MinidumpType: 1
+  MinidumpType: 0
   GenerateScreenshotOnException: 1
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   Enabled: 1
