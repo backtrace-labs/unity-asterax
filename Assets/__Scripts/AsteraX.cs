@@ -32,15 +32,6 @@ public class AsteraX : MonoBehaviour
                 model.Attributes.Attributes.Add("customAttributeFromBeforeSend", "IncrementingNumber" + incrementingNumber++);
                 return model;
             };
-
-        if (String.IsNullOrWhiteSpace(PlayerPrefs.GetString("backtrace_url")))
-        {
-            PlayerPrefs.SetString("backtrace_url", AsteraX.backtraceClient.Configuration.ServerUrl);
-            PlayerPrefs.Save();
-        }
-        
-        AsteraX.backtraceClient.Configuration.ServerUrl = PlayerPrefs.GetString("backtrace_url");
-        Debug.Log("backtrace_url: " + PlayerPrefs.GetString("backtrace_url"));
     }
 
 

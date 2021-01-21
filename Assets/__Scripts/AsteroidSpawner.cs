@@ -6,17 +6,17 @@ using UnityEngine;
      public GameObject[] AsteroidPrefabs;
 
      public int numberOfAsteroids;
-
-     private List<Texture2D> textures = new List<Texture2D>();
  
      void Start()
      {
           SpawnAsteroids(numberOfAsteroids);
      }
 
+#if UNITY_ANDROID || UNITY_IOS
+     private List<Texture2D> textures = new List<Texture2D>();
      private void OnLowMemory()
     {
-        Debug.LogError("OnLowMemory, we had " + textures.Count + " textures in here!");
+        Debug.Log("OnLowMemory, we had " + textures.Count + " textures in here!");
         textures = new List<Texture2D>();
         Resources.UnloadUnusedAssets();
     }
@@ -31,8 +31,10 @@ using UnityEngine;
           var t = new Texture2D(2048, 2048, TextureFormat.ARGB32, true);
           t.Apply();
           this.textures.Add(t);
+          Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
      }
-     
+#endif
+
      private void SpawnAsteroids(int amount) 
      {
           
