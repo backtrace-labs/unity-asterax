@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Backtrace.Unity;
+using Backtrace.Unity.Model;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Backtrace.Unity;
+using System.Collections;
+using System.IO;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
@@ -8,14 +13,15 @@ public class AsteraX : MonoBehaviour
     static private BacktraceClient backtraceClient;
 
     static private int incrementingNumber = 0;
-    
+
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         // static property, set once
         // but you want to include something even if native crashes occur
         // still works! Let me demonstrate.
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "da6eb2e751c87ae323537db16470f30425c9c1c0";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "3971dbc41f9e429165a199954e3db648715783e5";
+        AsteraX.backtraceClient["URL"] = AsteraX.backtraceClient.Configuration.ServerUrl;
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
@@ -37,11 +43,6 @@ public class AsteraX : MonoBehaviour
         Debug.Log("backtrace_url: " + PlayerPrefs.GetString("backtrace_url"));
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -62,6 +63,5 @@ public class AsteraX : MonoBehaviour
         int y = 100 / x;
         // iOS allows you to divide by zero, cool huh? But crash anyways pls
         throw new System.DivideByZeroException("Attempted to divide by zero");
-        
     }
 }
