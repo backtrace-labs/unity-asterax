@@ -2,7 +2,7 @@
 
 # Description
 
-Asteroids is a simple 2D space shooter.
+Asteroids is a simple 2D space shooter made in Unity.
 
 It contains a few problems, and has the Backtrace Unity SDK build in so the game problems can be reported on.
 
