@@ -9,7 +9,7 @@ It contains a few problems, and has the Backtrace Unity SDK build in so the game
 The four exceptions/problems:
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when an asteroid is hit by a bullet, a nullreference is thrown, captured and sent to Backtrace
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when the player ship's health goes down to 0, a native exception is triggered
-- [AsteroidSpawner.cs](Assets/__Scripts/AsteroidSpawner.cs) upon spawning the asteriods, it keeps creating textures, causes memory pressure, and then clearing the textures to prevent the application from being repead by the OS. Mobile only.
+- [AsteroidSpawner.cs](Assets/__Scripts/AsteroidSpawner.cs) upon spawning the asteriods at game startup, it keeps creating textures, causes memory pressure, and then clearing the textures to prevent the application from being repead by the OS, and keeps looping. Mobile only.
 - [Bullet.cs](Assets/__Scripts/Bullet.cs) when a bullet is destroyed without hitting an asteroid, a divide by zero is triggered.
 - [OffScreenWrapper.cs](Assets/__Scripts/OffScreenWrapper.cs) when the ship hits the edge of the screen, a call is done to a slow webservice in the main thread - triggering a hang.
 - [PlayerShip.cs](Assets/__Scripts/PlayerShip.cs) when there's more than 2 bullets in flight, an InsuffMemory is thrown (preventing more bullets from being created)
