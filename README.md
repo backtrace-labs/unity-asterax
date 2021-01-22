@@ -12,6 +12,8 @@ The four exceptions/problems:
 - [AsteroidSpawner.cs](Assets/__Scripts/AsteroidSpawner.cs) keeps creating textures, causes memory pressure, and then clearing the textures to prevent the application from being repead by the OS. Mobile only.
 - [Bullet.cs](Assets/__Scripts/Bullet.cs) when a bullet is destroyed without hitting an asteroid, a divide by zero is triggered.
 - [OffScreenWrapper.cs](Assets/__Scripts/OffScreenWrapper.cs) when the ship hits the edge of the screen, a call is done to a slow webservice in the main thread - triggering a hang.
+- [PlayerShip.cs](Assets/__Scripts/PlayerShip.cs) when there's more than 2 bullets in flight, an InsuffMemory is thrown (preventing more bullets from being created)
+- [PlayerShip.cs](Assets/__Scripts/PlayerShip.cs) when the player has less than 3 bullets available, a read to an not existing file is done
 
 # References
 
