@@ -6,7 +6,7 @@ Asteroids is a simple 2D space shooter made in Unity.
 
 It contains a few problems, and has the Backtrace Unity SDK build in so the game problems can be reported on.
 
-The four exceptions/problems:
+The exceptions/problems, spread across the application (to create realistic stacks):
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when an asteroid is hit by a bullet, a nullreference is thrown, captured and sent to Backtrace
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when the player ship's health goes down to 0, a native exception is triggered
 - [AsteroidSpawner.cs](Assets/__Scripts/AsteroidSpawner.cs) upon spawning the asteriods at game startup, it keeps creating textures, causes memory pressure, and then clearing the textures to prevent the application from being repead by the OS, and keeps looping. Mobile only.
