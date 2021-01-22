@@ -20,7 +20,7 @@ public class AsteraX : MonoBehaviour
         // static property, set once
         // but you want to include something even if native crashes occur
         // still works! Let me demonstrate.
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "3971dbc41f9e429165a199954e3db648715783e5";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "899292ff5b820f3d79f8e06a12ed7f6f83caed6f";
         AsteraX.backtraceClient["URL"] = AsteraX.backtraceClient.Configuration.ServerUrl;
 
         backtraceClient.BeforeSend =
