@@ -9,7 +9,7 @@ public class HUD : MonoBehaviour
     private Text textbox;
     void Start()
     {
-            textbox = GetComponent<Text>();
+        textbox = GetComponent<Text>();
     }
 
     void Update()
@@ -20,6 +20,7 @@ public class HUD : MonoBehaviour
         }
 
         textbox.text = "Health: " + PlayerShip.S.health + "\n" 
-                    + "Bullets: " + PlayerShip.S.bullets;
+                    + "Bullets: " + PlayerShip.S.bullets + "\n"
+                    + "Score: " + AsteraX.score;
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Net;
-using System.IO;
 
 /// <summary>
 /// When a GameObject exits the bounds of the OnScreenBounds, screen wrap it.
@@ -46,12 +44,6 @@ public class OffScreenWrapper : MonoBehaviour
 
         ScreenWrap(bounds);
 
-
-        if (GetComponent<PlayerShip>() != null)
-        {
-            ConnectToSlowBackend();
-        }
-
 #if DEBUG_AnnounceOnTriggerExit
         // GetComponent is pretty slow, but because this is in a debug test case 
         //  and only happens once every few seconds, it's okay here.
@@ -83,16 +75,25 @@ public class OffScreenWrapper : MonoBehaviour
         }
 
         transform.position = bounds.transform.TransformPoint(relativeLoc);
+
+        CalculateOverrideCoordinates(relativeLoc.x);
+    }                
+
+    void CalculateOverrideCoordinates(float x)
+    {
+        if (Mathf.Abs(x) > 0.5f)
+        {
+            // left the screen on the left or right
+            CompensateForGyroscopeDrift(x);
+        }
     }
 
-    private void ConnectToSlowBackend() 
+    void CompensateForGyroscopeDrift(float x)
     {
-        Debug.Log("ComputeSomethingComplicated - in");
-        WebClient client = new WebClient();
-        Stream stream = client.OpenRead("http://slowwly.robertomurray.co.uk/delay/10000/url/https://backtrace.io/wp-content/uploads/2018/02/backtrace-logo-default-retina.png");
-        StreamReader reader = new StreamReader(stream);
-        string content = reader.ReadToEnd(); 
-        Debug.Log("Content length: " + content.Length);
-        Debug.Log("ComputeSomethingComplicated - out");
-    }
+        if (Mathf.Abs(x) > 0.5f)
+        {
+            PlayerShip.GyroscopeDelta();
+        }
+    }    
+
 }

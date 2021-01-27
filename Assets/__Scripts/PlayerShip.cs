@@ -108,12 +108,6 @@ public class PlayerShip : MonoBehaviour
 
     void SpawnBullet(Vector3 mPos3D)
     {
-        // crash it!
-        if (GameObject.FindGameObjectsWithTag("Bullet").Length > 2)
-        {
-            throw new System.InsufficientMemoryException("Insuff mem.");
-        }
-
         GameObject go = Instantiate<GameObject>(this.bulletPrefab);
         go.transform.position = transform.position;
         go.transform.LookAt(mPos3D);

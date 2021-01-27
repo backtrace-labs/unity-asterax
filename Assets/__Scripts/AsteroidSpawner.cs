@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
  public class AsteroidSpawner : MonoBehaviour
  {
      public GameObject[] AsteroidPrefabs;
 
      public int numberOfAsteroids;
+
+     public float spawnRate = 0.5f;
  
      void Start()
      {
-          SpawnAsteroids(numberOfAsteroids);
+          Invoke("SpawnAsteroid", spawnRate);
      }
 
-#if UNITY_ANDROID || UNITY_IOS
+#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
      private List<Texture2D> textures = new List<Texture2D>();
      private void OnLowMemory()
     {
@@ -26,25 +26,25 @@ using UnityEngine;
           Application.lowMemory += OnLowMemory;
      }
 
-     void Update()
+     void FixedUpdate()
      {
-          var t = new Texture2D(2048, 2048, TextureFormat.ARGB32, true);
-          t.Apply();
-          this.textures.Add(t);
-          Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
+          if (GameObject.FindGameObjectsWithTag("Asteroid").Length > (numberOfAsteroids/2)) 
+          {
+               var t = new Texture2D(2048, 2048, TextureFormat.ARGB32, true);
+               t.Apply();
+               this.textures.Add(t);
+               Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
+          }
      }
 #endif
-
-     private void SpawnAsteroids(int amount) 
+     void SpawnAsteroid()
      {
-          
-          for (int i=0; i < amount; i++) 
+          if (GameObject.FindGameObjectsWithTag("Asteroid").Length < numberOfAsteroids)
           {
-               var pos = ScreenBounds.RANDOM_ON_SCREEN_LOC;
+               var pos = ScreenBounds.RANDOM_ON_EDGE_SCREEN_LOC;
                var chosenAsteroid = AsteroidPrefabs[UnityEngine.Random.Range(0, AsteroidPrefabs.Length)];
                var asteroid = Instantiate(chosenAsteroid, pos, Quaternion.identity);
- 
-               // You can still manipulate asteroid afterwards like .AddComponent etc
+               Invoke("SpawnAsteroid", spawnRate);
           }
      }
  }

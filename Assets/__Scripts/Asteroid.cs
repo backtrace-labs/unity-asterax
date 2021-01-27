@@ -88,12 +88,7 @@ public class Asteroid : MonoBehaviour
             Destroy(gameObject);
             PlayerShip.S.health -= 5;
 
-            // but you can update it constantly, ie, a saveState that gets applied to our client 
-            // each time it updates or something
             AsteraX.GetBacktraceClient()["shipHealth"] = "" + PlayerShip.S.health;
-            // so this way for c# exception we should keep seeing this property go lower
-
-            // and for the native crash below it should be at '0'
 
             if (PlayerShip.S.health <= 0) {
                 Destroy(otherGO);
@@ -114,6 +109,7 @@ public class Asteroid : MonoBehaviour
         Destroy(otherGO);
         Destroy(gameObject);
         PlayerShip.S.bullets += 2;
+        AsteraX.score += 10;
 
         try 
         {

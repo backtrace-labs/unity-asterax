@@ -99,6 +99,37 @@ public class ScreenBounds : MonoBehaviour
         }
     }
 
+    static public Vector3 RANDOM_ON_EDGE_SCREEN_LOC
+    {
+        get
+        {
+            Vector3 min = S.boxColl.bounds.min;
+            Vector3 max = S.boxColl.bounds.max;
+
+            System.Random rnd = new System.Random();
+
+            int randomInt = rnd.Next(4);
+            if (randomInt == 1) 
+            {
+                return new Vector3(min.x, Random.Range(min.y, max.y), 0);
+            } 
+            else  if (randomInt == 2)
+            {
+                return new Vector3(max.x, Random.Range(min.y, max.y), 0);
+            }
+            else  if (randomInt == 3)
+            {
+                return new Vector3(Random.Range(min.x, max.x), min.y, 0);
+            }
+            else
+            {
+                return new Vector3(Random.Range(min.x, max.x), max.y, 0);
+            }
+
+            
+        }
+    }
+
     static public Bounds BOUNDS
     {
         get

@@ -1,11 +1,7 @@
 ﻿using Backtrace.Unity;
-using Backtrace.Unity.Model;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using System.IO;
-using System.Threading.Tasks;
+using System.Net;
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
@@ -14,24 +10,46 @@ public class AsteraX : MonoBehaviour
 
     static private int incrementingNumber = 0;
 
+    static private int _score;
+    static public int score
+    {
+        get 
+        {
+            return _score;
+        }
+        set
+        {
+            _score = value;
+
+            if (score == 100)
+            {
+                ConnectToSlowBackend();
+            }
+        }
+    }
+
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
-        // static property, set once
-        // but you want to include something even if native crashes occur
-        // still works! Let me demonstrate.
         AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "899292ff5b820f3d79f8e06a12ed7f6f83caed6f";
-        AsteraX.backtraceClient["URL"] = AsteraX.backtraceClient.Configuration.ServerUrl;
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
             {
-                // this call back is only called for C# exceptions
-                // and ANRs as well (I'm fairly sure, let's find out)
-                // but not native crashes obviously
                 model.Attributes.Attributes.Add("customAttributeFromBeforeSend", "IncrementingNumber" + incrementingNumber++);
                 return model;
             };
+    }
+
+    static private void ConnectToSlowBackend() 
+    {
+        Debug.Log("ConnectToSlowBackend - in");
+        WebClient client = new WebClient();
+        Stream stream = client.OpenRead("http://slowwly.robertomurray.co.uk/delay/5500/url/https://backtrace.io/wp-content/uploads/2018/02/backtrace-logo-default-retina.png");
+        StreamReader reader = new StreamReader(stream);
+        string content = reader.ReadToEnd(); 
+        Debug.Log("Content length: " + content.Length);
+        Debug.Log("ConnectToSlowBackend - out");
     }
 
 
