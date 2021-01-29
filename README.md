@@ -1,5 +1,9 @@
 # asterax
 
+# Live demo
+
+- [WebGL version](https://vlussenburg.github.io/asterax)
+
 # Description
 
 Asteroids is a simple 2D space shooter made in Unity.
