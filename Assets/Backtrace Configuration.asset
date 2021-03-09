@@ -26,6 +26,7 @@ MonoBehaviour:
   SendUnhandledGameCrashesOnGameStartup: 1
   CaptureNativeCrashes: 1
   HandleANR: 1
+  OomReports: 1
   SymbolsUploadToken: 
   DeduplicationStrategy: -1
   UseNormalizedExceptionMessage: 1
