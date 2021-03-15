@@ -20,7 +20,7 @@ MonoBehaviour:
   DestroyOnLoad: 0
   Sampling: 1
   ReportFilterType: 0
-  GameObjectDepth: 3
+  GameObjectDepth: 1
   NumberOfLogs: 10
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
@@ -28,16 +28,16 @@ MonoBehaviour:
   HandleANR: 1
   OomReports: 1
   SymbolsUploadToken: 
-  DeduplicationStrategy: -1
-  UseNormalizedExceptionMessage: 1
-  MinidumpType: 1
+  DeduplicationStrategy: 0
+  UseNormalizedExceptionMessage: 0
+  MinidumpType: 524286
   GenerateScreenshotOnException: 1
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   Enabled: 1
-  AddUnityLogToReport: 1
+  AddUnityLogToReport: 0
   AutoSendMode: 1
   CreateDatabase: 1
-  MaxRecordCount: 0
+  MaxRecordCount: 8
   MaxDatabaseSize: 0
   RetryInterval: 60
   RetryLimit: 3
