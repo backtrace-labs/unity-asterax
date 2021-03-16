@@ -32,6 +32,8 @@ MonoBehaviour:
   UseNormalizedExceptionMessage: 0
   MinidumpType: 524286
   GenerateScreenshotOnException: 1
+  AttachmentPaths:
+  - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   Enabled: 1
   AddUnityLogToReport: 0

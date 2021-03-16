@@ -120,11 +120,11 @@
       "url": "https://packages.unity.com"
     },
     "io.backtrace.unity": {
-      "version": "3.3.3",
+      "version": "https://github.com/backtrace-labs/backtrace-unity.git#753f3a044b7b86386c419adcb76980a75a6b7f06",
       "depth": 0,
-      "source": "registry",
+      "source": "git",
       "dependencies": {},
-      "url": "https://package.openupm.com"
+      "hash": "753f3a044b7b86386c419adcb76980a75a6b7f06"
     },
     "nuget.mono-cecil": {
       "version": "0.1.6-preview",

@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Diagnostics;
-using System.Threading;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(OffScreenWrapper))]
 public class Asteroid : MonoBehaviour
