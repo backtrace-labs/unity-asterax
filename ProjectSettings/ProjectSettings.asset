@@ -171,7 +171,7 @@ PlayerSettings:
     iPhone: io.backtrace.asterax
   buildNumber:
     Standalone: 0
-    iPhone: 107
+    iPhone: 108
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 73

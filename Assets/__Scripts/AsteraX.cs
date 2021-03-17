@@ -22,10 +22,12 @@ public class AsteraX : MonoBehaviour
         {
             _score = value;
 
+#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
             if (score == 100)
             {
                 ConnectToSlowBackend();
             }
+#endif
 
             if (score % 150 == 0)
             {
@@ -35,6 +37,10 @@ public class AsteraX : MonoBehaviour
                     {
                         Destroy(o);
                     }
+
+                    //some platforms (iOS) it does seem to work, so crash here
+                    string thing = null;
+                    thing.EndsWith("death");
                 }).Start();
             }
 
@@ -71,6 +77,7 @@ public class AsteraX : MonoBehaviour
             };
     }
 
+#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
         Debug.Log("ConnectToSlowBackend - in");
@@ -82,6 +89,7 @@ public class AsteraX : MonoBehaviour
 
         Debug.Log("ConnectToSlowBackend - out");
     }
+#endif
 
 
     // Update is called once per frame
