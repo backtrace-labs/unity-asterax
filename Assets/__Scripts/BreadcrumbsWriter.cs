@@ -1,13 +1,11 @@
 using Backtrace.Unity.Json;
 using Backtrace.Unity.Model;
+using System;
 using System.IO;
 using System.Collections.Generic;  
-using UnityEngine;
-using System;
 using System.Text;
 using System.Threading.Tasks;
 
-[Serializable]
 public class Breadcrumb
 {
     public long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(); 
@@ -33,8 +31,6 @@ public class Breadcrumb
         jObject.Add("attributes", new  BacktraceJObject(attributes));
         return jObject.ToJson();
     }
-
-    
 }
 
 public class BreadcrumbsWriter
@@ -104,7 +100,7 @@ public class BreadcrumbsWriter
         bc.type = type;
         bc.message = message;
         bc.attributes = attributes;
-        AddBreadcrumb(bc);
+        this.AddBreadcrumb(bc);
     }
 
     /// <summary>
