@@ -11,6 +11,8 @@ public class AsteraX : MonoBehaviour
 
     static private int incrementingNumber = 0;
 
+    static public BreadcrumbsWriter bcw;
+
     static private int _score;
     static public int score
     {
@@ -75,6 +77,21 @@ public class AsteraX : MonoBehaviour
 
                 return model;
             };
+        Debug.Log(Application.persistentDataPath);
+        bcw = new BreadcrumbsWriter(backtraceClient.Configuration);
+        System.Collections.Generic.Dictionary<string, string> openWith = new System.Collections.Generic.Dictionary<string, string>();
+
+        // Add some elements to the dictionary. There are no
+        // duplicate keys, but some of the values are duplicates.
+        openWith.Add("txt", "notepad.exe");
+        openWith.Add("bmp", "paint.exe");
+        openWith.Add("dib", "paint.exe");
+        openWith.Add("rtf", "wordpad.exe");
+
+        Breadcrumb bc = new Breadcrumb();
+        bc.message = "GAME ON";
+        bc.attributes = openWith;
+        bcw.AddBreadcrumb(bc);
     }
 
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)

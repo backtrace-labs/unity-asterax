@@ -41,11 +41,20 @@ using System.Collections.Generic;
 #endif
      void SpawnAsteroid()
      {
-          if (GameObject.FindGameObjectsWithTag("Asteroid").Length < numberOfAsteroids)
+          int currentNumberOfAsteroids = GameObject.FindGameObjectsWithTag("Asteroid").Length;
+          if (currentNumberOfAsteroids < numberOfAsteroids)
           {
                var pos = ScreenBounds.RANDOM_ON_EDGE_SCREEN_LOC;
                var chosenAsteroid = AsteroidPrefabs[UnityEngine.Random.Range(0, AsteroidPrefabs.Length)];
                var asteroid = Instantiate(chosenAsteroid, pos, Quaternion.identity);
+
+               Breadcrumb bc = new Breadcrumb();
+               bc.message = "new asteroid spawned!";
+               bc.attributes = new Dictionary<string, string>();
+               bc.attributes.Add("currentNumberOfAsteroids", currentNumberOfAsteroids.ToString());
+               bc.attributes.Add("type",chosenAsteroid.name);
+               AsteraX.bcw.AddBreadcrumb(bc);
+
                Invoke("SpawnAsteroid", spawnRate);
           }
      }
