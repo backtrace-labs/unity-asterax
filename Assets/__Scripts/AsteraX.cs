@@ -60,9 +60,7 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "753f3a044b7b86386c419adcb76980a75a6b7f06";
-
-        
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "9aab5bc4d03ebe031830d1113d553b600cf25209";
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
