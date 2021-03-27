@@ -41,7 +41,7 @@ public class BreadcrumbsWriter
 {
     private static readonly string BREADCRUMBS_DIRNAME = "breadcrumbs";
     private static readonly string BREADCRUMB_FILENAME = "bt-breadcrumbs-0";
-    private readonly long maxFileSize = 64 * 1024; //64kB
+    private readonly long maxFileSize;
     private readonly string breadcrumbsFilePath;
     private readonly LinkedList<string> breadcrumbs;
     private readonly object syncLock = new object();
