@@ -34,6 +34,7 @@ MonoBehaviour:
   GenerateScreenshotOnException: 1
   AttachmentPaths:
   - ${Application.persistentDataPath}/data.txt
+  - ${Application.persistentDataPath}/.backtraceio/breadcrumbs/bt-breadcrumbs-0
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   Enabled: 1
   AddUnityLogToReport: 0

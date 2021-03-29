@@ -111,20 +111,14 @@ public class BreadcrumbsWriter
     // Possibly using async would help here too - but it's advised to call this from a background thread anyways (it should be threadsafe)
     public void Write()
     {
+        // set to true in case called externally (instead of autowrite)
         writeScheduled = true;
+
+        // lock on the synclock - so we're sure no other thread is messing the the breadcrumbs
+        // note that this lock is expensive (other 'breadcrumbwrite add thread' will be halted as long as this is going on)
         lock(syncLock)
         {
-            FileStream breadcrumbsFileStream = new FileStream(breadcrumbsFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-            StreamWriter breadcrumbsFileStreamWriter = new StreamWriter(breadcrumbsFileStream);
-            // truncate
-            breadcrumbsFileStreamWriter.BaseStream.SetLength(0);
-            // and write all
-            foreach (string line in breadcrumbs)
-            {
-                breadcrumbsFileStreamWriter.WriteLine(line);
-            }
-            breadcrumbsFileStreamWriter.Flush();
-            breadcrumbsFileStreamWriter.Close();
+            File.WriteAllLines(breadcrumbsFilePath, breadcrumbs);
             writeScheduled = false;
         }
     }
@@ -138,6 +132,9 @@ public class BreadcrumbsWriter
         string json = breadcrumb.ToJson();
         long breadcrumbSize = Encoding.UTF8.GetBytes(json).Length;
 
+        // might have to async this entire piece - since order is not important and this might block a render thread
+        // it might not even be worth it to lock on this - although linkedlist is not threadsafe it might be better to use a ConcurrentQueue: https://docs.microsoft.com/en-us/dotnet/api/system.collections.concurrent.concurrentqueue-1?view=net-5.0
+        // note that this cannot be answered without doing meaningful tests.
         lock(syncLock)
         {
             breadcrumbsByteSize += breadcrumbSize;
@@ -151,16 +148,16 @@ public class BreadcrumbsWriter
             }
 
             breadcrumbs.AddLast(json);
-        }
 
-        // if a write has been sheduled, the previous record will be written when it triggers, so don't schedule another
-        if (autoWrite && !writeScheduled)
-        {
-            writeScheduled = true;
-            Task.Run(() => 
+            // if a write has been sheduled, the previous record will be written when it triggers, so don't schedule another
+            if (autoWrite && !writeScheduled)
             {
-                this.Write();
-            }).Wait(waitBeforeWrite);
+                writeScheduled = true;
+                Task.Delay(waitBeforeWrite).ContinueWith(t =>
+                {
+                    this.Write();
+                });
+            }
         }
     }
 
