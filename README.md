@@ -2,7 +2,7 @@
 
 # Live demo
 
-- [WebGL version](https://vlussenburg.github.io/asterax)
+- [WebGL version](https://backtrace-labs.github.io/unity-asterax/)
 
 # Description
 
