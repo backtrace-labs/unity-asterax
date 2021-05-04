@@ -1,7 +1,8 @@
 ﻿using Backtrace.Unity;
+using Backtrace.Unity.Interfaces;
 using UnityEngine;
 using System.IO;
-using System.Net;
+using System.Collections.Generic;
 using System.Threading;
 
 [RequireComponent(typeof(BacktraceClient))]
@@ -12,6 +13,8 @@ public class AsteraX : MonoBehaviour
     static private int incrementingNumber = 0;
 
     static public BreadcrumbsWriter bcw;
+
+    static public IBacktraceSession session;
 
     static private int _score;
     static public int score
@@ -48,6 +51,12 @@ public class AsteraX : MonoBehaviour
 
             if (score % 200 == 0)
             {
+                // indicates another level played
+                session.AddSessionEvent("levels_played", new Dictionary<string, string>() {
+                     {"application.version", AsteraX.backtraceClient["application.version"]}
+                });
+                session.Send();
+
                 // will work fine from main thread
                 foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
                 {
@@ -60,7 +69,17 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "ebe06b354c98bd35e9f123c4b3b03afafb46db9a";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
+        IBacktraceSession session = AsteraX.backtraceClient.Session;
+
+        session.SubmissionUrl = "https://events.backtrace.io/api/user-aggregation/events?token=a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530";
+        
+        session.AddUniqueEvent("guid", new Dictionary<string, string>() {
+            {"guid", AsteraX.backtraceClient["guid"]},
+            {"application.version", AsteraX.backtraceClient["application.version"]}
+        });
+        session.SendStartupEvent();
+        AsteraX.session = session;
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
@@ -86,10 +105,10 @@ public class AsteraX : MonoBehaviour
         openWith.Add("dib", "paint.exe");
         openWith.Add("rtf", "wordpad.exe");
 
-        Breadcrumb bc = new Breadcrumb();
-        bc.message = "GAME ON";
-        bc.attributes = openWith;
-        bcw.AddBreadcrumb(bc);
+        // Breadcrumb bc = new Breadcrumb();
+        // bc.message = "GAME ON";
+        // bc.attributes = openWith;
+        // bcw.AddBreadcrumb(bc);
     }
 
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)

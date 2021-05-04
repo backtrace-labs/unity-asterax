@@ -36,6 +36,9 @@ MonoBehaviour:
   - ${Application.persistentDataPath}/data.txt
   - ${Application.persistentDataPath}/.backtraceio/breadcrumbs/bt-breadcrumbs-0
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
+  EnableEventAggregationSupport: 1
+  EventAggregationSubmissionUrl: https://events.backtrace.io/api/user-aggregation/events?token=a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530
+  MaximumNumberOfEvents: 10
   Enabled: 1
   AddUnityLogToReport: 0
   AutoSendMode: 1
