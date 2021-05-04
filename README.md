@@ -17,7 +17,7 @@ The exceptions/problems, spread across the application (to create realistic stac
 - [OffscreenWrapper.cs](Assets/__Scripts/OffscreenWrapper.cs) when the player leaves the left or right side of the side, a divide by zero is triggered.
 - [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score of 100, a call is done to a slow webservice in the main thread - triggering a hang. Mobile only.
 - [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 150, an attempt will be made to clear all Asteroid objects from a rogue thread - this fails on most platforms. On the platforms it doesn't, a NullReference is triggered.
-- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 200, all Asteroid objects from a rogue thread and a `level_completed` session event will be triggered.
+- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 200, all Asteroid objects will be cleared and a `level_completed` session event will be triggered.
 - [PlayerShip.cs](Assets/__Scripts/PlayerShip.cs) when the player has less than 3 bullets available, a read to an not existing file is done
 
 # References
