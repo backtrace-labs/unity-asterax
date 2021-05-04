@@ -14,7 +14,13 @@ public class AsteraX : MonoBehaviour
 
     static public BreadcrumbsWriter bcw;
 
-    static public IBacktraceSession session;
+    static public IBacktraceSession session
+    {
+        get
+        {
+            return backtraceClient.Session;
+        }
+    }
 
     static private int _score;
     static public int score
@@ -51,16 +57,19 @@ public class AsteraX : MonoBehaviour
 
             if (score % 200 == 0)
             {
-                // indicates another level played
-                session.AddSessionEvent("levels_played", new Dictionary<string, string>() {
-                     {"application.version", AsteraX.backtraceClient["application.version"]}
-                });
-                session.Send();
-
-                // will work fine from main thread
+                 // will work fine from main thread
                 foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
                 {
                     Destroy(o);
+                }
+
+                if (session != null)
+                {
+                    // indicates another level played
+                    session.AddSessionEvent("levels_played", new Dictionary<string, string>() {
+                        {"application.version", AsteraX.backtraceClient["application.version"]}
+                    });
+                    session.Send();
                 }
             }
         }
@@ -69,17 +78,15 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
-        IBacktraceSession session = AsteraX.backtraceClient.Session;
+        //AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
 
-        session.SubmissionUrl = "https://events.backtrace.io/api/user-aggregation/events?token=a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530";
-        
-        session.AddUniqueEvent("guid", new Dictionary<string, string>() {
-            {"guid", AsteraX.backtraceClient["guid"]},
-            {"application.version", AsteraX.backtraceClient["application.version"]}
-        });
-        session.SendStartupEvent();
-        AsteraX.session = session;
+        if (session != null)
+        {
+            session.AddUniqueEvent("guid", new Dictionary<string, string>() {
+                {"guid", AsteraX.backtraceClient["guid"]},
+                {"application.version", AsteraX.backtraceClient["application.version"]}
+            }); 
+        }
 
         backtraceClient.BeforeSend =
             (Backtrace.Unity.Model.BacktraceData model) =>
