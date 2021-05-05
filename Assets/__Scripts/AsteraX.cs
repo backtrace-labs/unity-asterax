@@ -78,7 +78,8 @@ public class AsteraX : MonoBehaviour
     void Awake()
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
-        //AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
+        AsteraX.backtraceClient.Refresh(); 
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
 
         if (session != null)
         {
