@@ -4,6 +4,10 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Net;
+using System;
+using Backtrace.Unity.Model.Breadcrumbs;
+using Backtrace.Unity.Model.Metrics;
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
@@ -12,13 +16,13 @@ public class AsteraX : MonoBehaviour
 
     static private int incrementingNumber = 0;
 
-    static public BreadcrumbsWriter bcw;
+    //static public BreadcrumbsWriter bcw;
 
-    static public IBacktraceSession session
+    static public IBacktraceMetrics metrics
     {
         get
         {
-            return backtraceClient.Session;
+            return backtraceClient.Metrics;
         }
     }
 
@@ -40,9 +44,19 @@ public class AsteraX : MonoBehaviour
             }
 #endif
 
-            if (score % 150 == 0)
+            if (score % 2 == 0)
             {
                 new Thread( () => {
+                    Debug.LogError("Background task - error deleting Asteroids!");
+
+                    for (int i = 0; i < 200; i++)
+                    {
+                        metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
+                            {"application.version", AsteraX.backtraceClient["application.version"]}
+                        });   
+                    }
+                    //metrics.Send();
+
                     // this will actually blow up on most platforms, since it has to be called from the main thread
                     foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
                     {
@@ -62,15 +76,6 @@ public class AsteraX : MonoBehaviour
                 {
                     Destroy(o);
                 }
-
-                if (session != null)
-                {
-                    // indicates another level played
-                    session.AddSessionEvent("levels_played", new Dictionary<string, string>() {
-                        {"application.version", AsteraX.backtraceClient["application.version"]}
-                    });
-                    session.Send();
-                }
             }
         }
     }
@@ -79,14 +84,25 @@ public class AsteraX : MonoBehaviour
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "1e2d885e9cc038b69bea41fb2be59fb1dbc02600";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "792eb0ed777c3be378aba5068eb2252666e37fe4";
+        AsteraX.backtraceClient["SteamID"] = "1339";
+        AsteraX.backtraceClient["guid"] =  Guid.NewGuid().ToString();
 
-        if (session != null)
+        AsteraX.backtraceClient.EnableMetrics("https://events-test.backtrace.io/api", 10);
+
+
+        if (metrics != null)
         {
-            session.AddUniqueEvent("guid", new Dictionary<string, string>() {
-                {"guid", AsteraX.backtraceClient["guid"]},
-                {"application.version", AsteraX.backtraceClient["application.version"]}
-            }); 
+            
+            metrics.AddUniqueEvent("SteamID", null);
+        }
+
+        IBacktraceBreadcrumbs breadcrumbs = backtraceClient.Breadcrumbs;
+        for (int i = 0; i < 500; i++)
+        {
+            breadcrumbs.Info("hi from Asterax!", new Dictionary<string, string>() {
+                 {"application.version", AsteraX.backtraceClient["application.version"]}
+             });
         }
 
         backtraceClient.BeforeSend =
@@ -99,21 +115,22 @@ public class AsteraX : MonoBehaviour
                     outputFile.WriteLine(incrementingNumber);
                 }
 
-
                 return model;
             };
         Debug.Log(Application.persistentDataPath);
-        bcw = new BreadcrumbsWriter(backtraceClient.Configuration);
-        System.Collections.Generic.Dictionary<string, string> openWith = new System.Collections.Generic.Dictionary<string, string>();
+
+        
+        //bcw = new BreadcrumbsWriter(backtraceClient.Configuration);
+        //System.Collections.Generic.Dictionary<string, string> openWith = new System.Collections.Generic.Dictionary<string, string>();
 
         // Add some elements to the dictionary. There are no
         // duplicate keys, but some of the values are duplicates.
-        openWith.Add("txt", "notepad.exe");
-        openWith.Add("bmp", "paint.exe");
-        openWith.Add("dib", "paint.exe");
-        openWith.Add("rtf", "wordpad.exe");
+        // openWith.Add("txt", "notepad.exe");
+        // openWith.Add("bmp", "paint.exe");
+        // openWith.Add("dib", "paint.exe");
+        // openWith.Add("rtf", "wordpad.exe");
 
-        // Breadcrumb bc = new Breadcrumb();
+        // // Breadcrumb bc = new Breadcrumb();
         // bc.message = "GAME ON";
         // bc.attributes = openWith;
         // bcw.AddBreadcrumb(bc);
@@ -124,7 +141,7 @@ public class AsteraX : MonoBehaviour
     {
         Debug.Log("ConnectToSlowBackend - in");
         WebClient client = new WebClient();
-        Stream stream = client.OpenRead("http://slowwly.robertomurray.co.uk/delay/8000/url/https://backtrace.io/wp-content/uploads/2018/02/backtrace-logo-default-retina.png");
+        Stream stream = client.OpenRead("https://deelay.me/10000/https://picsum.photos/200/300");
         StreamReader reader = new StreamReader(stream);
         string content = reader.ReadToEnd(); 
         Debug.Log("Content length: " + content.Length);
