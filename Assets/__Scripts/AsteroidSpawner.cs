@@ -19,9 +19,9 @@ using System.Collections.Generic;
      private void OnLowMemory()
     {
         Debug.Log("OnLowMemory, we had " + textures.Count + " textures in here!");
-        Debug.LogError("trigger error");
-        textures = new List<Texture2D>();
-        Resources.UnloadUnusedAssets();
+        //Debug.LogError("trigger error");
+        //textures = new List<Texture2D>();
+        //Resources.UnloadUnusedAssets();
     }
 
      void Awake() 

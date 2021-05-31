@@ -44,24 +44,26 @@ public class AsteraX : MonoBehaviour
             }
 #endif
 
-            if (score % 2 == 0)
+            if (score % 20 == 0)
             {
                 new Thread( () => {
                     Debug.LogError("Background task - error deleting Asteroids!");
 
-                    for (int i = 0; i < 200; i++)
+                    for (int i = 0; i < 51; i++)
                     {
                         metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
                             {"application.version", AsteraX.backtraceClient["application.version"]}
                         });   
                     }
-                    //metrics.Send();
+
+                    
+                    
 
                     // this will actually blow up on most platforms, since it has to be called from the main thread
-                    foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
-                    {
-                        Destroy(o);
-                    }
+                    // foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
+                    // {
+                    //     Destroy(o);
+                    // }
 
                     //some platforms (iOS) it does seem to work, so crash here
                     string thing = null;
@@ -69,12 +71,22 @@ public class AsteraX : MonoBehaviour
                 }).Start();
             }
 
-            if (score % 200 == 0)
+            if (score % 20 == 0)
             {
                  // will work fine from main thread
                 foreach (GameObject o in GameObject.FindGameObjectsWithTag("Asteroid"))
                 {
                     Destroy(o);
+                }
+
+                //metrics.Send(); 
+
+                
+
+                AsteraX.backtraceClient.Database.Flush();
+                for (int i = 0; i < 200; i++)
+                {
+                    
                 }
             }
         }
@@ -84,25 +96,37 @@ public class AsteraX : MonoBehaviour
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "792eb0ed777c3be378aba5068eb2252666e37fe4";
-        AsteraX.backtraceClient["SteamID"] = "1339";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "b88e1e7dfd3c3b8144b89a11c0eff2799a384078";
+
+        // for event agg testing purposes, generate unique values for this each time
+        AsteraX.backtraceClient["SteamID"] = Guid.NewGuid().ToString();
         AsteraX.backtraceClient["guid"] =  Guid.NewGuid().ToString();
 
-        AsteraX.backtraceClient.EnableMetrics("https://events-test.backtrace.io/api", 10);
+        string UniqueUrl = "https://events-test.backtrace.io/api/unique-events/submit?token=46280f28e8b156a7816454ef07e94844ca23edafc306a2303a175db15aacbb17&universe=backtrace";
+        string SummedUrl = "https://events-test.backtrace.io/api/summed-events/submit?token=46280f28e8b156a7816454ef07e94844ca23edafc306a2303a175db15aacbb17&universe=backtrace";
+        AsteraX.backtraceClient.EnableMetrics(UniqueUrl, SummedUrl, 3600);
+        //AsteraX.backtraceClient.Metrics.MaximumSummedEvents = 500;
 
 
         if (metrics != null)
         {
-            
-            metrics.AddUniqueEvent("SteamID", null);
+            metrics.AddUniqueEvent("SteamID");
         }
 
+        AsteraX.backtraceClient["guid"] =  Guid.NewGuid().ToString();
+        Debug.Log("guid1"+ AsteraX.backtraceClient["guid"]);
+        AsteraX.backtraceClient["guid"] =  Guid.NewGuid().ToString();
+        Debug.Log("guid2"+ AsteraX.backtraceClient["guid"]);
+
         IBacktraceBreadcrumbs breadcrumbs = backtraceClient.Breadcrumbs;
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 200; i++)
         {
             breadcrumbs.Info("hi from Asterax!", new Dictionary<string, string>() {
-                 {"application.version", AsteraX.backtraceClient["application.version"]}
+                 {"application.version", AsteraX.backtraceClient["application.version"]},
+                 {"index", "" + i}
              });
+
+             AsteraX.backtraceClient.Database.Add(new Backtrace.Unity.Model.BacktraceReport("hello! #" + i), null);
         }
 
         backtraceClient.BeforeSend =

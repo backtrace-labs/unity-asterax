@@ -30,18 +30,18 @@ MonoBehaviour:
   LogLevel: -1
   UseNormalizedExceptionMessage: 0
   MinidumpType: 524286
-  GenerateScreenshotOnException: 1
+  GenerateScreenshotOnException: 0
   AttachmentPaths:
   - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
-  EnableEventAggregationSupport: 0
-  TimeIntervalInMin: 1
+  EnableMetricsSupport: 0
+  TimeIntervalInMin: 0
   Enabled: 1
   AddUnityLogToReport: 0
   AutoSendMode: 1
   CreateDatabase: 1
-  MaxRecordCount: 8
-  MaxDatabaseSize: 0
+  MaxRecordCount: 100
+  MaxDatabaseSize: 50
   RetryInterval: 60
   RetryLimit: 3
   RetryOrder: 0

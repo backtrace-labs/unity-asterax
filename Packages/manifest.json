@@ -14,7 +14,7 @@
     "com.unity.timeline": "1.2.6",
     "com.unity.ugui": "1.0.0",
     "com.unity.xr.legacyinputhelpers": "2.1.6",
-    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#792eb0ed777c3be378aba5068eb2252666e37fe4",
+    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#b88e1e7dfd3c3b8144b89a11c0eff2799a384078",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
