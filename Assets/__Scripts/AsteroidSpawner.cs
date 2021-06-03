@@ -19,8 +19,9 @@ using System.Collections.Generic;
      private void OnLowMemory()
     {
         Debug.Log("OnLowMemory, we had " + textures.Count + " textures in here!");
-        textures = new List<Texture2D>();
-        Resources.UnloadUnusedAssets();
+        //Debug.LogError("trigger error");
+        //textures = new List<Texture2D>();
+        //Resources.UnloadUnusedAssets();
     }
 
      void Awake() 
@@ -32,7 +33,7 @@ using System.Collections.Generic;
      {
           if (GameObject.FindGameObjectsWithTag("Asteroid").Length > (numberOfAsteroids/2)) 
           {
-               var t = new Texture2D(2048, 2048, TextureFormat.ARGB32, true);
+               var t = new Texture2D(1024, 1024, TextureFormat.ARGB32, true);
                t.Apply();
                this.textures.Add(t);
                Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
@@ -48,12 +49,12 @@ using System.Collections.Generic;
                var chosenAsteroid = AsteroidPrefabs[UnityEngine.Random.Range(0, AsteroidPrefabs.Length)];
                var asteroid = Instantiate(chosenAsteroid, pos, Quaternion.identity);
 
-               Breadcrumb bc = new Breadcrumb();
-               bc.message = "new asteroid spawned!";
-               bc.attributes = new Dictionary<string, string>();
-               bc.attributes.Add("currentNumberOfAsteroids", currentNumberOfAsteroids.ToString());
-               bc.attributes.Add("type",chosenAsteroid.name);
-               AsteraX.bcw.AddBreadcrumb(bc);
+               // Breadcrumb bc = new Breadcrumb();
+               // bc.message = "new asteroid spawned!";
+               // bc.attributes = new Dictionary<string, string>();
+               // bc.attributes.Add("currentNumberOfAsteroids", currentNumberOfAsteroids.ToString());
+               // bc.attributes.Add("type",chosenAsteroid.name);
+               // AsteraX.bcw.AddBreadcrumb(bc);
 
                Invoke("SpawnAsteroid", spawnRate);
           }
