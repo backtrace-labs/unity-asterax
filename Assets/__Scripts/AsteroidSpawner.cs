@@ -49,13 +49,6 @@ using System.Collections.Generic;
                var chosenAsteroid = AsteroidPrefabs[UnityEngine.Random.Range(0, AsteroidPrefabs.Length)];
                var asteroid = Instantiate(chosenAsteroid, pos, Quaternion.identity);
 
-               // Breadcrumb bc = new Breadcrumb();
-               // bc.message = "new asteroid spawned!";
-               // bc.attributes = new Dictionary<string, string>();
-               // bc.attributes.Add("currentNumberOfAsteroids", currentNumberOfAsteroids.ToString());
-               // bc.attributes.Add("type",chosenAsteroid.name);
-               // AsteraX.bcw.AddBreadcrumb(bc);
-
                Invoke("SpawnAsteroid", spawnRate);
           }
      }

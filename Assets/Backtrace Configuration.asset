@@ -24,6 +24,10 @@ MonoBehaviour:
   NumberOfLogs: 10
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
+  CaptureNativeCrashes: 1
+  HandleANR: 1
+  OomReports: 0
+  SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
   BacktraceBreadcrumbsLevel: -1
@@ -35,7 +39,7 @@ MonoBehaviour:
   - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
   EnableMetricsSupport: 0
-  TimeIntervalInMin: 0
+  TimeIntervalInMin: 30
   Enabled: 1
   AddUnityLogToReport: 0
   AutoSendMode: 1
