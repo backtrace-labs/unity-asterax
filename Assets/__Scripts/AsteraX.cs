@@ -12,7 +12,7 @@ using Backtrace.Unity.Model.Metrics;
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
 {
-    static private BacktraceClient backtraceClient;
+    static public BacktraceClient backtraceClient;
 
     static private int incrementingNumber = 0;
 
@@ -59,13 +59,12 @@ public class AsteraX : MonoBehaviour
             {
                 metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
-                    {"score", score}
+                    {"score", "" + score}
                 });
 
                 backtraceClient.Breadcrumbs.Info("Level Completed in Asterax!", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
-                    {"uname.sysname", AsteraX.backtraceClient["uname.sysname"]},
-                    {"score", score}
+                    {"score", "" + score}
                 });
                 
                  // will work fine from main thread
@@ -94,7 +93,6 @@ public class AsteraX : MonoBehaviour
 
         backtraceClient.Breadcrumbs.Info("Startup in Asterax!", new Dictionary<string, string>() {
             {"application.version", AsteraX.backtraceClient["application.version"]},
-            {"uname.sysname", AsteraX.backtraceClient["uname.sysname"]},
         });
 
         //AsteraX.backtraceClient.Database.Add(new Backtrace.Unity.Model.BacktraceReport("hello! #" + i), null);
