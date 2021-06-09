@@ -88,6 +88,11 @@ public class Asteroid : MonoBehaviour
             if (PlayerShip.S.health <= 0) {
                 Destroy(otherGO);
 
+                backtraceClient.Breadcrumbs.Info("Player Died!", new Dictionary<string, string>() {
+                    {"application.version", AsteraX.backtraceClient["application.version"]},
+                    {"uname.sysname", AsteraX.backtraceClient["uname.sysname"]},
+                });
+
                 // this crashes the entire game 
                 Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
             }
