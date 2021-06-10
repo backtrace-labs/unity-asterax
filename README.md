@@ -14,8 +14,8 @@ The exceptions/problems, spread across the application (to create realistic stac
 
 Managed Exceptions
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when an asteroid is hit by a bullet, a nullreference is thrown, captured and sent to Backtrace
-- [OffscreenWrapper.cs](Assets/__Scripts/OffscreenWrapper.cs) when the player leaves the left or right side of the side, a divide by zero is triggered.
-- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 150, an attempt will be made to clear all Asteroid objects from a rogue thread - this fails on most platforms. On the platforms it doesn't, a NullReference is triggered.
+- [OffscreenWrapper.cs](Assets/__Scripts/OffscreenWrapper.cs) when the player (or an asteroid) leaves the left or right side of the side, a divide by zero is triggered.
+- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 200, an attempt will be made to clear all Asteroid objects from a rogue thread - this fails on most platforms. On the platforms it doesn't, a NullReference is triggered.
 - [PlayerShip.cs](Assets/__Scripts/PlayerShip.cs) when the player has less than 3 bullets available, a read to an not existing file is done
 
 OOM (mobile)
@@ -34,7 +34,7 @@ Breadcrumbs
 - Game started
 - Player died
 - Asteroid spawned (or skipped bc there were enough)
-- Level completed every 200 points
+- Level completed every 100 points
 
 # References
 
