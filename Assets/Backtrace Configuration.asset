@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e908b13f7467f4185f3f45d43568c4, type: 3}
   m_Name: Backtrace Configuration
   m_EditorClassIdentifier: 
-  ServerUrl: https://submit.backtrace.io/backtrace/46280f28e8b156a7816454ef07e94844ca23edafc306a2303a175db15aacbb17/json
+  ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
   ReportPerMin: 100
   HandleUnhandledExceptions: 1
@@ -26,7 +26,7 @@ MonoBehaviour:
   SendUnhandledGameCrashesOnGameStartup: 1
   CaptureNativeCrashes: 1
   HandleANR: 1
-  OomReports: 0
+  OomReports: 1
   SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
@@ -38,8 +38,8 @@ MonoBehaviour:
   AttachmentPaths:
   - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
-  EnableMetricsSupport: 0
-  TimeIntervalInMin: 30
+  EnableMetricsSupport: 1
+  TimeIntervalInMin: 1
   Enabled: 1
   AddUnityLogToReport: 0
   AutoSendMode: 1

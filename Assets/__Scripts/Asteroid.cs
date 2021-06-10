@@ -91,7 +91,6 @@ public class Asteroid : MonoBehaviour
 
                 AsteraX.backtraceClient.Breadcrumbs.Info("Player Died!", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
-                    {"uname.sysname", AsteraX.backtraceClient["uname.sysname"]},
                 });
 
                 // this crashes the entire game 
