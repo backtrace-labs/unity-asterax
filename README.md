@@ -24,14 +24,17 @@ OOM (mobile)
 Native Crash (mobile)
 - [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when the player ship's health goes down to 0, a native exception is triggered
 
-Hang
-- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score of 100, a call is done to a slow webservice in the main thread - triggering a hang. Mobile only.
+Hang (mobile)
+- [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score of 100, a call is done to a slow webservice in the main thread - triggering a hang.
 
-Event Agg
+Event Agg (not on WebGL)
 - [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 200, all Asteroid objects will be cleared and a `level_completed` session event will be triggered.
 
 Breadcrumbs
-- Work to be done!
+- Game started
+- Player died
+- Asteroid spawned (or skipped bc there were enough)
+- Level completed every 200 points
 
 # References
 
