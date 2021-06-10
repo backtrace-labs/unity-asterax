@@ -21,11 +21,11 @@ Managed Exceptions
 OOM (mobile)
 - [AsteroidSpawner.cs](Assets/__Scripts/AsteroidSpawner.cs) upon spawning the asteriods (which is done every 500ms), when the number of asteroids reaches 50% of the maximum, the game will keep creating textures, causes memory pressure, and then clearing the textures to prevent the application from being repead by the OS, and keeps looping. Mobile only.
 
-Native Crash (mobile)
-- [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when the player ship's health goes down to 0, a native exception is triggered
-
 Hang (mobile)
 - [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score of 100, a call is done to a slow webservice in the main thread - triggering a hang.
+
+Native Crash
+- [Asteroid.cs](Assets/__Scripts/Asteroid.cs) when the player ship's health goes down to 0, a native exception is triggered
 
 Event Agg (not on WebGL)
 - [Asterax.cs](Assets/__Scripts/Asterax.cs) when the player hits a score divisable by 200, all Asteroid objects will be cleared and a `level_completed` session event will be triggered.
