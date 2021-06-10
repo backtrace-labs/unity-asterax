@@ -51,4 +51,4 @@ MonoBehaviour:
     m_Scopes:
     - com.openupm
     - io.backtrace.unity
-    m_SelectedScopeIndex: 0
+    m_SelectedScopeIndex: 1

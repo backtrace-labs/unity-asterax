@@ -11,14 +11,14 @@ using System.Collections.Generic;
  
      void Start()
      {
-          Invoke("SpawnAsteroid", spawnRate);
+          SpawnAsteroid();
      }
 
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
      private List<Texture2D> textures = new List<Texture2D>();
      private void OnLowMemory()
     {
-        Debug.Log("OnLowMemory, we had " + textures.Count + " textures in here!");
+        Debug.Log("OnLowMemory, we have " + textures.Count + " asteroid textures!");
         //Debug.LogError("trigger error");
         //textures = new List<Texture2D>();
         //Resources.UnloadUnusedAssets();
@@ -36,7 +36,7 @@ using System.Collections.Generic;
                var t = new Texture2D(1024, 1024, TextureFormat.ARGB32, true);
                t.Apply();
                this.textures.Add(t);
-               Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
+               //Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
           }
      }
 #endif
@@ -47,16 +47,24 @@ using System.Collections.Generic;
           {
                var pos = ScreenBounds.RANDOM_ON_EDGE_SCREEN_LOC;
                var chosenAsteroid = AsteroidPrefabs[UnityEngine.Random.Range(0, AsteroidPrefabs.Length)];
+
+               AsteraX.backtraceClient.Breadcrumbs.Info("Spawning asteroid", new Dictionary<string, string>() {
+                    {"application.version", AsteraX.backtraceClient["application.version"]},
+                    {"currentNumberOfAsteroids", "" + currentNumberOfAsteroids}
+                });
+
+
                var asteroid = Instantiate(chosenAsteroid, pos, Quaternion.identity);
-
-               // Breadcrumb bc = new Breadcrumb();
-               // bc.message = "new asteroid spawned!";
-               // bc.attributes = new Dictionary<string, string>();
-               // bc.attributes.Add("currentNumberOfAsteroids", currentNumberOfAsteroids.ToString());
-               // bc.attributes.Add("type",chosenAsteroid.name);
-               // AsteraX.bcw.AddBreadcrumb(bc);
-
-               Invoke("SpawnAsteroid", spawnRate);
           }
+          else
+          {
+               AsteraX.backtraceClient.Breadcrumbs.Info("Skipping spawning asteroid", new Dictionary<string, string>() {
+                    {"application.version", AsteraX.backtraceClient["application.version"]},
+                    {"currentNumberOfAsteroids", "" + currentNumberOfAsteroids}
+                });
+
+          }
+
+          Invoke("SpawnAsteroid", spawnRate);
      }
  }

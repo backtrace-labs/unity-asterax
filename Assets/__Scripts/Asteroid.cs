@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Diagnostics;
+using System.Collections.Generic;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(OffScreenWrapper))]
 public class Asteroid : MonoBehaviour
@@ -87,6 +88,10 @@ public class Asteroid : MonoBehaviour
 
             if (PlayerShip.S.health <= 0) {
                 Destroy(otherGO);
+
+                AsteraX.backtraceClient.Breadcrumbs.Info("Player Died!", new Dictionary<string, string>() {
+                    {"application.version", AsteraX.backtraceClient["application.version"]},
+                });
 
                 // this crashes the entire game 
                 Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
