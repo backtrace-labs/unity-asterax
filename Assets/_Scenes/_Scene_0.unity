@@ -1043,6 +1043,11 @@ PrefabInstance:
       propertyPath: bullets
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3148766061316803528, guid: 2c350f2ea6d36435b8b50bf6e3c429cb,
+        type: 3}
+      propertyPath: button_tex
+      value: 
+      objectReference: {fileID: 2800000, guid: b78bbe947b7a74cc8994180b20d3899a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c350f2ea6d36435b8b50bf6e3c429cb, type: 3}
 --- !u!1 &2144739410
