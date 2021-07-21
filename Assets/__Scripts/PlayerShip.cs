@@ -1,12 +1,17 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerShip : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public float shipSpeed = 10f;
+
+    // Define a texture and GUIContent
+    private GUIContent button_tex_con;
+
 
     // This is a somewhat protected private singleton for PlayerShip
     static private PlayerShip _S;
@@ -30,6 +35,8 @@ public class PlayerShip : MonoBehaviour
     public GameObject bulletPrefab;
 
     public int health = 100;
+
+    public Texture button_tex;
 
     public int bullets;
     void Start()
@@ -59,11 +66,34 @@ public class PlayerShip : MonoBehaviour
         {
             Debug.Log("No Gyro.");
         }
+        
+        // Define a GUIContent which uses the texture
+        this.button_tex_con = new GUIContent(button_tex);
+        this.button_tex_con.text = " Looks like you experienced a problem.\nClick here to report!";
     }
 
     public void OnFire()
     {
         Fire();
+    }
+
+    void OnGUI() {
+        var configMap = new Dictionary<string, object>();
+        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+        
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+
+        GUILayout.BeginVertical();
+        // Starting a conversation with your customers
+        if (GUILayout.Button(button_tex_con))
+        {
+            AsteraX.help.ShowConversation(configMap);
+        }
+
+        GUILayout.EndVertical();
+        GUILayout.EndHorizontal();
+        GUILayout.EndArea();
     }
 
     public void OnMove(InputValue value)

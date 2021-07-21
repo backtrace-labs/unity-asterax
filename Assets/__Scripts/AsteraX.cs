@@ -14,7 +14,7 @@ using Helpshift;
 public class AsteraX : MonoBehaviour
 {
     static public BacktraceClient backtraceClient;
-	static HelpshiftSdk help;
+	static public HelpshiftSdk help;
 	
     static private int incrementingNumber = 0;
 
@@ -80,10 +80,6 @@ public class AsteraX : MonoBehaviour
 
     void Awake()
     {
-        help = HelpshiftSdk.GetInstance();
-        var configMap = new Dictionary<string, object>();
-        help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
-		
 		AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
         AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "7e10fc53f681c25f5e3774729fdfe6efa98859a8";
@@ -116,17 +112,12 @@ public class AsteraX : MonoBehaviour
                 return model;
             };
         Debug.Log(Application.persistentDataPath);
-    }
 
-
-    void onGUI () {
+        help = HelpshiftSdk.GetInstance();
         var configMap = new Dictionary<string, object>();
-
-        // Starting a conversation with your customers
-
-            help.ShowConversation(configMap);
-        
+        help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
     }
+
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
