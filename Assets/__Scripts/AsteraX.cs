@@ -8,12 +8,14 @@ using System.Net;
 using System;
 using Backtrace.Unity.Model.Breadcrumbs;
 using Backtrace.Unity.Model.Metrics;
+using Helpshift;
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
 {
     static public BacktraceClient backtraceClient;
-
+	static HelpshiftSdk help;
+	
     static private int incrementingNumber = 0;
 
     //static public BreadcrumbsWriter bcw;
@@ -78,7 +80,11 @@ public class AsteraX : MonoBehaviour
 
     void Awake()
     {
-        AsteraX.backtraceClient = GetComponent<BacktraceClient>();
+        help = HelpshiftSdk.GetInstance();
+        var configMap = new Dictionary<string, object>();
+        help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
+		
+		AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
         AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "bf1815c7427c70c473674ea83597cb067658f458";
 
@@ -112,6 +118,15 @@ public class AsteraX : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
     }
 
+
+    void onGUI () {
+        var configMap = new Dictionary<string, object>();
+
+        // Starting a conversation with your customers
+
+            help.ShowConversation(configMap);
+        
+    }
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
