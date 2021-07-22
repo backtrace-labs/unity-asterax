@@ -109,7 +109,7 @@ public class PlayerShip : MonoBehaviour
                 //Map<String, Object> config = new HashMap<>();    
                 configMap.Add("customIssueFields", cifDictionary);
                 AsteraX.help.ShowConversation(configMap);
-#else
+#elif (UNITY_WEBGL)
                 PlayerShip.EnableHelpshift(AsteraX.backtraceClient["guid"]);
 #endif
             }

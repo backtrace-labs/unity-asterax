@@ -7,12 +7,13 @@ using System.Threading;
 using System.Net;
 using System;
 using Backtrace.Unity.Model.Breadcrumbs;
-using Backtrace.Unity.Model.Metrics;
+using Backtrace.Unity.Model;
 using Helpshift;
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
 {
+    static public AsteraX instance;
     static public BacktraceClient backtraceClient;
 	static public HelpshiftSdk help;
 
@@ -74,6 +75,7 @@ public class AsteraX : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
 		AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
         AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "7e10fc53f681c25f5e3774729fdfe6efa98859a8";
@@ -112,21 +114,35 @@ public class AsteraX : MonoBehaviour
         help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
     }
 
-#if ((UNITY_WEBGL))
+#if (UNITY_WEBGL)
     static private void ConnectToSlowBackend() 
     {
         AsteraX.Hanging = true;
         Debug.Log("ConnectToSlowBackend - in");
-        
+
+        Time.timeScale = 0;
+        instance.StartCoroutine(instance.DoWork());
+
+        Dictionary<string, string> attrs = new Dictionary<string, string>();
+        attrs.Add("_mod_fingerprint", "05dc48a0085eaaa10622fd116a39b8e536939dc89ef1411bf03f957b3d326bfb");
+        BacktraceReport report = new BacktraceReport(message: "ANRException: Blocked thread detected", attributes: attrs);
+
+        backtraceClient.Send(report);
 
         Debug.Log("Content length: " + 0);
 
         Debug.Log("ConnectToSlowBackend - out");
         //AsteraX.Hanging = false;
     }
+
+    IEnumerator<object> DoWork()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        Time.timeScale = 1;
+    }
 #endif
 
-#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
+#if ((UNITY_ANDROID || UNITY_IOS))
     static private void ConnectToSlowBackend() 
     {
         AsteraX.Hanging = true;

@@ -1,6 +1,8 @@
 mergeInto(LibraryManager.library, {
 
   EnableHelpshift: function (guid) {
+    console.log("guid: " + Pointer_stringify(guid));
+
     var PLATFORM_ID = "gamingdemo_platform_20190415170138422-dfe89ece2efffd9",
         DOMAIN = "gamingdemo",
         LANGUAGE = "en";
@@ -9,7 +11,7 @@ mergeInto(LibraryManager.library, {
         platformId: PLATFORM_ID,
         domain: DOMAIN,
         language: LANGUAGE,
-        userId: "123456",
+        userId: Pointer_stringify(guid),
         userEmail: "Backtrace@Backtrace.io",
         userName: "John Doe"
     };
@@ -29,7 +31,7 @@ mergeInto(LibraryManager.library, {
             // Type of Custom Issue Field
             type: "singleline",
             // Value to set for Custom Issue Field
-            value: guid
+            value: Pointer_stringify(guid)
         }
     });
   }
