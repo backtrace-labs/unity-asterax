@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Helpshift;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerShip : MonoBehaviour
@@ -78,7 +79,6 @@ public class PlayerShip : MonoBehaviour
     }
 
     void OnGUI() {
-        var configMap = new Dictionary<string, object>();
         GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
         
         GUILayout.BeginHorizontal();
@@ -100,6 +100,14 @@ public class PlayerShip : MonoBehaviour
 
 	   if (GUILayout.Button(button_tex_con))
         {
+            var configMap = new Dictionary<string, object>();
+            Dictionary<string, string> backtraceid = new Dictionary<string, string>();
+            backtraceid.Add("type", "singleline");
+            backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
+            Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
+            cifDictionary.Add("device_id", backtraceid);
+            //Map<String, Object> config = new HashMap<>();    
+            configMap.Add("customIssueFields", cifDictionary);
             AsteraX.help.ShowConversation(configMap);
         }
 
