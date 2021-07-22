@@ -91,8 +91,23 @@ public class PlayerShip : MonoBehaviour
 		backtraceid.Add("type", "singleline");
 		backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
 		
+		Dictionary<string, string> playerlevel = new Dictionary<string, string>();
+		playerlevel.Add("type", "number");
+		playerlevel.Add("value", "56");
+		
+		Dictionary<string, string> playerspend = new Dictionary<string, string>();
+		playerspend.Add("type", "number");
+		playerspend.Add("value", "7500");
+		
+		Dictionary<string, string> playersegment = new Dictionary<string, string>();
+		playersegment.Add("type", "dropdown");
+		playersegment.Add("value", "vip");
+		
 		Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
 		cifDictionary.Add("device_id", backtraceid);
+		cifDictionary.Add("level", playerlevel);
+		cifDictionary.Add("lifetime_spend", playerspend);
+		cifDictionary.Add("segment", playersegment);
 		
 		//Map<String, Object> config = new HashMap<>();    
 		configMap.Add("customIssueFields", cifDictionary);
