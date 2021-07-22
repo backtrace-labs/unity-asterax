@@ -86,7 +86,19 @@ public class PlayerShip : MonoBehaviour
 
         GUILayout.BeginVertical();
         // Starting a conversation with your customers
-        if (GUILayout.Button(button_tex_con))
+		
+		Dictionary<string, string> backtraceid = new Dictionary<string, string>();
+		backtraceid.Add("type", "singleline");
+		backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
+		
+		Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
+		cifDictionary.Add("device_id", backtraceid);
+		
+		//Map<String, Object> config = new HashMap<>();    
+		configMap.Add("customIssueFields", cifDictionary);
+
+
+	   if (GUILayout.Button(button_tex_con))
         {
             AsteraX.help.ShowConversation(configMap);
         }
