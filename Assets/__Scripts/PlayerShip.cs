@@ -42,7 +42,7 @@ public class PlayerShip : MonoBehaviour
 
     public int bullets;
 
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL)
     [DllImport("__Internal")]
     private static extern void EnableHelpshift(string guid);
 #endif
@@ -85,7 +85,7 @@ public class PlayerShip : MonoBehaviour
         Fire();
     }
 
-#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
+#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL))
     void OnGUI() {
 
         if (AsteraX.Hanging)

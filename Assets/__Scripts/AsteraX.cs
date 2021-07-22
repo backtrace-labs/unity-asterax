@@ -33,8 +33,8 @@ public class AsteraX : MonoBehaviour
         {
             _score = value;
 
-#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
-            if (score == 100)
+#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL))
+            if (score % 50 == 0)
             {
                 ConnectToSlowBackend();
             }
@@ -112,6 +112,20 @@ public class AsteraX : MonoBehaviour
         help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
     }
 
+#if ((UNITY_WEBGL))
+    static private void ConnectToSlowBackend() 
+    {
+        AsteraX.Hanging = true;
+        Debug.Log("ConnectToSlowBackend - in");
+        
+
+        Debug.Log("Content length: " + 0);
+
+        Debug.Log("ConnectToSlowBackend - out");
+        //AsteraX.Hanging = false;
+    }
+#endif
+
 #if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
@@ -124,7 +138,7 @@ public class AsteraX : MonoBehaviour
         Debug.Log("Content length: " + content.Length);
 
         Debug.Log("ConnectToSlowBackend - out");
-        AsteraX.Hanging = false;
+        //AsteraX.Hanging = false;
     }
 #endif
 
