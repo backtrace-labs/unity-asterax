@@ -94,7 +94,7 @@ public class Asteroid : MonoBehaviour
                 });
 
                 // this crashes the entire game 
-                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
+                //tils.ForceCrash(ForcedCrashCategory.AccessViolation);
             }
         }  
         else if (otherGO.tag == "Asteroid") 
@@ -117,7 +117,7 @@ public class Asteroid : MonoBehaviour
         }
         catch (System.NullReferenceException nre)
         {
-            AsteraX.GetBacktraceClient().Send(nre);
+            //AsteraX.GetBacktraceClient().Send(nre);
         }
     }
 }

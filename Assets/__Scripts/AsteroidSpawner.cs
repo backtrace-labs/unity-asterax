@@ -33,9 +33,9 @@ using System.Collections.Generic;
      {
           if (GameObject.FindGameObjectsWithTag("Asteroid").Length > (numberOfAsteroids/2)) 
           {
-               var t = new Texture2D(1024, 1024, TextureFormat.ARGB32, true);
-               t.Apply();
-               this.textures.Add(t);
+               //var t = new Texture2D(1024, 1024, TextureFormat.ARGB32, true);
+               //t.Apply();
+               //this.textures.Add(t);
                //Debug.Log("Update, we have " + this.textures.Count + " textures in here!");
           }
      }

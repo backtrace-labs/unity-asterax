@@ -154,7 +154,7 @@ public class PlayerShip : MonoBehaviour
 
         if (this.bullets < 3)
         {
-            System.IO.File.ReadAllBytes("Path to not existing file");
+            //System.IO.File.ReadAllBytes("Path to not existing file");
         }
     }
 

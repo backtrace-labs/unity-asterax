@@ -126,7 +126,7 @@ public class AsteraX : MonoBehaviour
     }
 #endif
 
-#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
+#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
         AsteraX.Hanging = true;
@@ -159,8 +159,8 @@ public class AsteraX : MonoBehaviour
         // throws error!
         int x = 0;
 
-        int y = 100 / x;
+        //int y = 100 / x;
         // iOS allows you to divide by zero, cool huh? But crash anyways pls
-        throw new System.DivideByZeroException("Attempted to divide by zero");
+        //throw new System.DivideByZeroException("Attempted to divide by zero");
     }
 }
