@@ -15,18 +15,12 @@ public class AsteraX : MonoBehaviour
 {
     static public BacktraceClient backtraceClient;
 	static public HelpshiftSdk help;
+
+    static public Boolean Hanging = false;
 	
     static private int incrementingNumber = 0;
 
     //static public BreadcrumbsWriter bcw;
-
-    static public IBacktraceMetrics metrics
-    {
-        get
-        {
-            return backtraceClient.Metrics;
-        }
-    }
 
     static private int _score;
     static public int score
@@ -39,7 +33,7 @@ public class AsteraX : MonoBehaviour
         {
             _score = value;
 
-#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
+#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
             if (score == 100)
             {
                 ConnectToSlowBackend();
@@ -59,10 +53,10 @@ public class AsteraX : MonoBehaviour
 
             if (score % 100 == 0)
             {
-                metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
-                    {"application.version", AsteraX.backtraceClient["application.version"]},
-                    {"score", "" + score}
-                });
+                // metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
+                //     {"application.version", AsteraX.backtraceClient["application.version"]},
+                //     {"score", "" + score}
+                // });
 
                 backtraceClient.Breadcrumbs.Info("Level Completed in Asterax!", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
@@ -118,9 +112,10 @@ public class AsteraX : MonoBehaviour
         help.Install("gamingdemo_platform_20190415170138400-f90498405ad7bd2", "gamingdemo.helpshift.com", configMap);
     }
 
-#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
+#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
     static private void ConnectToSlowBackend() 
     {
+        AsteraX.Hanging = true;
         Debug.Log("ConnectToSlowBackend - in");
         WebClient client = new WebClient();
         Stream stream = client.OpenRead("https://deelay.me/10000/https://picsum.photos/200/300");
@@ -129,6 +124,7 @@ public class AsteraX : MonoBehaviour
         Debug.Log("Content length: " + content.Length);
 
         Debug.Log("ConnectToSlowBackend - out");
+        AsteraX.Hanging = false;
     }
 #endif
 

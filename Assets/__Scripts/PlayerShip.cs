@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Helpshift;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -40,6 +41,12 @@ public class PlayerShip : MonoBehaviour
     public Texture button_tex;
 
     public int bullets;
+
+#if (UNITY_WEBGL && !UNITY_EDITOR)
+    [DllImport("__Internal")]
+    private static extern void EnableHelpshift(string guid);
+#endif
+
     void Start()
     {
         S = this;
@@ -78,31 +85,41 @@ public class PlayerShip : MonoBehaviour
         Fire();
     }
 
+#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR)
     void OnGUI() {
-        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-        
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
 
-        GUILayout.BeginVertical();
-        // Starting a conversation with your customers
-        if (GUILayout.Button(button_tex_con))
-        {
-            var configMap = new Dictionary<string, object>();
-            Dictionary<string, string> backtraceid = new Dictionary<string, string>();
-            backtraceid.Add("type", "singleline");
-            backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
-            Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
-            cifDictionary.Add("device_id", backtraceid);
-            //Map<String, Object> config = new HashMap<>();    
-            configMap.Add("customIssueFields", cifDictionary);
-            AsteraX.help.ShowConversation(configMap);
+        if (AsteraX.Hanging)
+        { 
+            GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            GUILayout.BeginVertical();
+            // Starting a conversation with your customers
+            if (GUILayout.Button(button_tex_con))
+            {
+#if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
+                var configMap = new Dictionary<string, object>();
+                Dictionary<string, string> backtraceid = new Dictionary<string, string>();
+                backtraceid.Add("type", "singleline");
+                backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
+                Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
+                cifDictionary.Add("device_id", backtraceid);
+                //Map<String, Object> config = new HashMap<>();    
+                configMap.Add("customIssueFields", cifDictionary);
+                AsteraX.help.ShowConversation(configMap);
+#else
+                PlayerShip.EnableHelpshift(AsteraX.backtraceClient["guid"]);
+#endif
+            }
+
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
         }
-
-        GUILayout.EndVertical();
-        GUILayout.EndHorizontal();
-        GUILayout.EndArea();
     }
+#endif
 
     public void OnMove(InputValue value)
     {
