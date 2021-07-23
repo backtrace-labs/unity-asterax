@@ -103,9 +103,27 @@ public class PlayerShip : MonoBehaviour
                 var configMap = new Dictionary<string, object>();
                 Dictionary<string, string> backtraceid = new Dictionary<string, string>();
                 backtraceid.Add("type", "singleline");
-                backtraceid.Add("value", AsteraX.backtraceClient["guid"]);
+                backtraceid.Add("value", AsteraX.backtraceClient["guid"]);				
+                Dictionary<string, string> playerlevel = new Dictionary<string, string>();
+                playerlevel.Add("type", "number");
+                playerlevel.Add("value", "35");
+                Dictionary<string, string> playerspend = new Dictionary<string, string>();
+                playerspend.Add("type", "number");
+                playerspend.Add("value", "1750");		
+                Dictionary<string, string> playerid = new Dictionary<string, string>();
+                playerid.Add("type", "singleline");
+                playerid.Add("value", "BestPlayerEver");	
+                Dictionary<string, string> playersegment = new Dictionary<string, string>();
+                playersegment.Add("type", "multiline");
+                playersegment.Add("value", "vip");
+
+
                 Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
                 cifDictionary.Add("device_id", backtraceid);
+				cifDictionary.Add("level", playerlevel);
+				cifDictionary.Add("lifetime_spend", playerspend);
+				cifDictionary.Add("player_id", playerid);
+				cifDictionary.Add("segment", playersegment);
                 //Map<String, Object> config = new HashMap<>();    
                 configMap.Add("customIssueFields", cifDictionary);
                 AsteraX.help.ShowConversation(configMap);
