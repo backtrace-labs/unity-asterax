@@ -117,6 +117,16 @@ public class PlayerShip : MonoBehaviour
                 playersegment.Add("type", "multiline");
                 playersegment.Add("value", "vip");
 
+				Dictionary<string, string> userDetails = new Dictionary<string, string>
+				{
+					{ "userId", "BestPlayerEver" },
+					{ "userEmail", "rcoleman@helpshift.com" },
+					{ "userName", "Ronnie Coleman" }
+				};
+
+
+				AsteraX.help.Login(userDetails);
+
 
                 Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
                 cifDictionary.Add("device_id", backtraceid);
