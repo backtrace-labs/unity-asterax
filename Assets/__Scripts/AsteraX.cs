@@ -124,7 +124,7 @@ public class AsteraX : MonoBehaviour
         instance.StartCoroutine(instance.DoWork());
 
         Dictionary<string, string> attrs = new Dictionary<string, string>();
-        attrs.Add("_mod_fingerprint", "05dc48a0085eaaa10622fd116a39b8e536939dc89ef1411bf03f957b3d326bfb");
+        attrs.Add("_mod_fingerprint", "f02cb19781bc5736c09c855916491c2f2aceea0482c1e65a5319773cb48dd512");
         BacktraceReport report = new BacktraceReport(message: "ANRException: Blocked thread detected", attributes: attrs);
 
         backtraceClient.Send(report);
