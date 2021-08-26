@@ -100,6 +100,14 @@ public class PlayerShip : MonoBehaviour
             if (GUILayout.Button(button_tex_con))
             {
 #if ((UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR)
+		Dictionary<string, string> userDetails = new Dictionary<string, string>
+		{
+			{ "userId", "BestPlayerEver" },
+			{ "userEmail", "rcoleman@helpshift.com" },
+			{ "userName", "Ronnie Coleman" }
+		};
+		AsteraX.help.Login(userDetails);
+
                 var configMap = new Dictionary<string, object>();
                 Dictionary<string, string> backtraceid = new Dictionary<string, string>();
                 backtraceid.Add("type", "singleline");
@@ -117,24 +125,13 @@ public class PlayerShip : MonoBehaviour
                 playersegment.Add("type", "multiline");
                 playersegment.Add("value", "vip");
 
-				Dictionary<string, string> userDetails = new Dictionary<string, string>
-				{
-					{ "userId", "BestPlayerEver" },
-					{ "userEmail", "rcoleman@helpshift.com" },
-					{ "userName", "Ronnie Coleman" }
-				};
-
-
-				AsteraX.help.Login(userDetails);
-
-
                 Dictionary<string, object> cifDictionary = new Dictionary<string, object>();
                 cifDictionary.Add("device_id", backtraceid);
-				cifDictionary.Add("level", playerlevel);
-				cifDictionary.Add("lifetime_spend", playerspend);
-				cifDictionary.Add("player_id", playerid);
-				cifDictionary.Add("segment", playersegment);
-                //Map<String, Object> config = new HashMap<>();    
+		cifDictionary.Add("level", playerlevel);
+		cifDictionary.Add("lifetime_spend", playerspend);
+		cifDictionary.Add("player_id", playerid);
+		cifDictionary.Add("segment", playersegment);
+		
                 configMap.Add("customIssueFields", cifDictionary);
                 AsteraX.help.ShowConversation(configMap);
 #elif (UNITY_WEBGL)
