@@ -27,7 +27,6 @@ MonoBehaviour:
   CaptureNativeCrashes: 1
   HandleANR: 1
   OomReports: 1
-  SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
   BacktraceBreadcrumbsLevel: -1

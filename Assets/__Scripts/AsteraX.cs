@@ -7,7 +7,9 @@ using System.Threading;
 using System.Net;
 using System;
 using Backtrace.Unity.Model.Breadcrumbs;
+#if !UNITY_WEBGL
 using Backtrace.Unity.Model.Metrics;
+#endif
 
 [RequireComponent(typeof(BacktraceClient))]
 public class AsteraX : MonoBehaviour
@@ -18,6 +20,7 @@ public class AsteraX : MonoBehaviour
 
     //static public BreadcrumbsWriter bcw;
 
+#if !UNITY_WEBGL
     static public IBacktraceMetrics metrics
     {
         get
@@ -25,6 +28,7 @@ public class AsteraX : MonoBehaviour
             return backtraceClient.Metrics;
         }
     }
+#endif
 
     static private int _score;
     static public int score
@@ -57,11 +61,12 @@ public class AsteraX : MonoBehaviour
 
             if (score % 100 == 0)
             {
+#if !UNITY_WEBGL
                 metrics.AddSummedEvent("levels_played", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
                     {"score", "" + score}
                 });
-
+#endif
                 backtraceClient.Breadcrumbs.Info("Level Completed in Asterax!", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
                     {"score", "" + score}

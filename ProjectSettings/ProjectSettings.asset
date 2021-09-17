@@ -165,6 +165,8 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -184,13 +186,13 @@ PlayerSettings:
   applicationIdentifier:
     Android: io.backtrace.asterax
     Standalone: io.backtrace.asterax
-    iPhone: io.backtrace.asterax
+    iPhone: io.backtrace.asterax2
   buildNumber:
     Standalone: 0
-    iPhone: 1
+    iPhone: 3
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 3
+  AndroidBundleVersionCode: 7
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -253,7 +255,7 @@ PlayerSettings:
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
-  appleDeveloperTeamID: ZNMJ8N3LU6
+  appleDeveloperTeamID: HZ3NMWYA63
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
@@ -902,7 +904,13 @@ PlayerSettings:
   activeInputHandler: 2
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: 
   organizationId: 
   cloudEnabled: 0
