@@ -6,7 +6,7 @@
     <title>Unity WebGL Player | AsteraX</title>
   </head>
   <body style="text-align: center">
-    <canvas id="unity-canvas" style="width: 1056px; height: 600px; background: #231F20"></canvas>
+    <canvas id="unity-canvas" width=1056 height=600 style="width: 1056px; height: 600px; background: #231F20"></canvas>
     <script src="Build/webgl.loader.js"></script>
     <script>
       createUnityInstance(document.querySelector("#unity-canvas"), {
@@ -17,7 +17,9 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Backtrace.io",
         productName: "AsteraX",
-        productVersion: "4.0.0",
+        productVersion: "4.0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
     </script>
   </body>
