@@ -27,7 +27,6 @@ MonoBehaviour:
   CaptureNativeCrashes: 1
   HandleANR: 1
   OomReports: 1
-  ClientSideUnwinding: 1
   SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
@@ -35,7 +34,7 @@ MonoBehaviour:
   LogLevel: -1
   UseNormalizedExceptionMessage: 0
   MinidumpType: 524286
-  GenerateScreenshotOnException: 0
+  GenerateScreenshotOnException: 1
   AttachmentPaths:
   - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
