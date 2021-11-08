@@ -20,13 +20,15 @@ MonoBehaviour:
   DestroyOnLoad: 0
   Sampling: 1
   ReportFilterType: 0
-  GameObjectDepth: 1
-  NumberOfLogs: 10
+  GameObjectDepth: 0
+  NumberOfLogs: 0
   PerformanceStatistics: 1
   SendUnhandledGameCrashesOnGameStartup: 1
   CaptureNativeCrashes: 1
   HandleANR: 1
   OomReports: 1
+  ClientSideUnwinding: 1
+  SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
   BacktraceBreadcrumbsLevel: -1
