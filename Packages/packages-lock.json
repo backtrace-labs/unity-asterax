@@ -134,11 +134,11 @@
       "url": "https://packages.unity.com"
     },
     "io.backtrace.unity": {
-      "version": "https://github.com/backtrace-labs/backtrace-unity.git#288badc424a84aca9e7f05f22159da1a949d3f2e",
+      "version": "https://github.com/backtrace-labs/backtrace-unity.git#4e3343631e5f2743c4a5044bf5664d6d5beb8fbd",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "288badc424a84aca9e7f05f22159da1a949d3f2e"
+      "hash": "4e3343631e5f2743c4a5044bf5664d6d5beb8fbd"
     },
     "nuget.mono-cecil": {
       "version": "0.1.6-preview",
