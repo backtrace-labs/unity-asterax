@@ -85,7 +85,7 @@ public class AsteraX : MonoBehaviour
     {
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "4e3343631e5f2743c4a5044bf5664d6d5beb8fbd";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "a93763be9c9aa6f9f346472060e2ef05557d2162";
 
         // for event agg testing purposes, generate unique values for this each time
         // AsteraX.backtraceClient["SteamID"] = Guid.NewGuid().ToString();

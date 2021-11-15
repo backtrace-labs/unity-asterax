@@ -12,15 +12,6 @@
       "source": "builtin",
       "dependencies": {}
     },
-    "com.unity.ads": {
-      "version": "3.7.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.analytics": {
       "version": "3.5.3",
       "depth": 0,
@@ -134,11 +125,11 @@
       "url": "https://packages.unity.com"
     },
     "io.backtrace.unity": {
-      "version": "https://github.com/backtrace-labs/backtrace-unity.git#4e3343631e5f2743c4a5044bf5664d6d5beb8fbd",
+      "version": "https://github.com/backtrace-labs/backtrace-unity.git#a93763be9c9aa6f9f346472060e2ef05557d2162",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4e3343631e5f2743c4a5044bf5664d6d5beb8fbd"
+      "hash": "a93763be9c9aa6f9f346472060e2ef05557d2162"
     },
     "nuget.mono-cecil": {
       "version": "0.1.6-preview",

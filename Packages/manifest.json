@@ -2,7 +2,6 @@
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
-    "com.unity.ads": "3.7.5",
     "com.unity.analytics": "3.5.3",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.11",
@@ -14,7 +13,7 @@
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
     "com.unity.xr.legacyinputhelpers": "2.1.8",
-    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#4e3343631e5f2743c4a5044bf5664d6d5beb8fbd",
+    "io.backtrace.unity": "https://github.com/backtrace-labs/backtrace-unity.git#a93763be9c9aa6f9f346472060e2ef05557d2162",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
