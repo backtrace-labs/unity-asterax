@@ -93,8 +93,13 @@ public class Asteroid : MonoBehaviour
                     {"application.version", AsteraX.backtraceClient["application.version"]},
                 });
 
+#if (UNITY_ANDROID && !UNITY_EDITOR)
+                CrashOnAndroid();
+#else
                 // this crashes the entire game 
                 Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
+#endif
+
             }
         }  
         else if (otherGO.tag == "Asteroid") 
@@ -102,6 +107,18 @@ public class Asteroid : MonoBehaviour
             //Destroy(otherGO);
             //Destroy(gameObject);
         }        
+    }
+    void CrashOnAndroid()
+    {
+        // https://stackoverflow.com/questions/17511070/android-force-crash-with-uncaught-exception-in-thread
+        var message = new AndroidJavaObject("java.lang.String", "This is a test crash, ignore.");
+        var exception = new AndroidJavaObject("java.lang.Exception", message);
+       
+        var looperClass = new AndroidJavaClass("android.os.Looper");
+        var mainLooper = looperClass.CallStatic<AndroidJavaObject>("getMainLooper");
+        var mainThread = mainLooper.Call<AndroidJavaObject>("getThread");
+        var exceptionHandler = mainThread.Call<AndroidJavaObject>("getUncaughtExceptionHandler");
+        exceptionHandler.Call("uncaughtException", mainThread, exception);
     }
 
     void AsteroidHitByBullet(GameObject otherGO)
