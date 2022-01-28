@@ -86,19 +86,20 @@ public class Asteroid : MonoBehaviour
 
             AsteraX.GetBacktraceClient()["shipHealth"] = "" + PlayerShip.S.health;
 
+            if (PlayerShip.S.health <= 90) {
+#if (!UNITY_EDITOR)
+                //CrashOnAndroid();
+                // this crashes the entire game 
+                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
+#endif
+            }
+
             if (PlayerShip.S.health <= 0) {
                 Destroy(otherGO);
 
                 AsteraX.backtraceClient.Breadcrumbs.Info("Player Died!", new Dictionary<string, string>() {
                     {"application.version", AsteraX.backtraceClient["application.version"]},
                 });
-
-#if (UNITY_ANDROID && !UNITY_EDITOR)
-                CrashOnAndroid();
-#else
-                // this crashes the entire game 
-                Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
-#endif
 
             }
         }  

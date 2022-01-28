@@ -83,9 +83,14 @@ public class AsteraX : MonoBehaviour
 
     void Awake()
     {
+        //var stream = File.Open(Application.persistentDataPath + "/.backtraceio/",FileMode.Open, FileAccess.Read);
+        //var reader = new StreamReader(stream);
+        // Read data from this file, when I'm done I don't need it any more
+        
+
         AsteraX.backtraceClient = GetComponent<BacktraceClient>();
         AsteraX.backtraceClient.Refresh(); 
-        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "a93763be9c9aa6f9f346472060e2ef05557d2162";
+        AsteraX.backtraceClient["backtrace-unity-commit-sha"] = "ba856a1773a8649694a2d158898164318bee2032";
 
         // for event agg testing purposes, generate unique values for this each time
         // AsteraX.backtraceClient["SteamID"] = Guid.NewGuid().ToString();

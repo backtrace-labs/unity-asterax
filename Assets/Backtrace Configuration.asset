@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerUrl: https://submit.backtrace.io/cd03/a6e36d208d08f5e9a3a8a1a0276bae6afb7464e85e78c57a34d3fa50c1524530/json
   Token: 
-  ReportPerMin: 100
+  ReportPerMin: 1000
+  DisableInEditor: 0
   HandleUnhandledExceptions: 1
   IgnoreSslValidation: 0
   DestroyOnLoad: 0
@@ -26,7 +27,9 @@ MonoBehaviour:
   SendUnhandledGameCrashesOnGameStartup: 1
   CaptureNativeCrashes: 1
   HandleANR: 1
+  AnrWatchdogTimeout: 5000
   OomReports: 1
+  ClientSideUnwinding: 0
   SymbolsUploadToken: 
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 1
@@ -34,7 +37,7 @@ MonoBehaviour:
   LogLevel: -1
   UseNormalizedExceptionMessage: 0
   MinidumpType: 524286
-  GenerateScreenshotOnException: 1
+  GenerateScreenshotOnException: 0
   AttachmentPaths:
   - ${Application.persistentDataPath}/data.txt
   DatabasePath: ${Application.persistentDataPath}/.backtraceio/
