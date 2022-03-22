@@ -88,7 +88,7 @@ public class Asteroid : MonoBehaviour
 
             if (PlayerShip.S.health <= 90) {
 #if (!UNITY_EDITOR)
-                //CrashOnAndroid();
+                CrashOnAndroid();
                 // this crashes the entire game 
                 Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
 #endif

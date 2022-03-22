@@ -197,7 +197,7 @@ PlayerSettings:
     iPhone: 7
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 29
+  AndroidBundleVersionCode: 34
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -814,7 +814,7 @@ PlayerSettings:
   platformArchitecture:
     iPhone: 1
   scriptingBackend:
-    Android: 1
+    Android: 0
     Standalone: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
