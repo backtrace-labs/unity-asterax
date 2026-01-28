@@ -69,7 +69,7 @@ public class PlayerShip : MonoBehaviour
     public void OnMove(InputValue value)
     {
         Vector2 vel = value.Get<Vector2>();
-        rigid.velocity = vel * shipSpeed;
+        rigid.linearVelocity = vel * shipSpeed;
     }
 
     void Update() 
@@ -77,7 +77,7 @@ public class PlayerShip : MonoBehaviour
         if (UnityEngine.InputSystem.Gyroscope.current != null) 
         {
             Vector3 vel = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
-            rigid.velocity = vel * shipSpeed;
+            rigid.linearVelocity = vel * shipSpeed;
         }
     }
 

@@ -61,7 +61,7 @@ public class Asteroid : MonoBehaviour
 
         // Multiply the unit length of vel by the correct speed (randomized) for this size of Asteroid
         vel = vel * Random.Range(this.minVel, this.maxVel) / (float)size;
-        rigid.velocity = vel;
+        rigid.linearVelocity = vel;
 
         rigid.angularVelocity = Random.insideUnitSphere * this.maxAngularVel;
     }
