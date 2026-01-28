@@ -34,7 +34,7 @@ public class TiltWithVelocity : MonoBehaviour
 
     private Vector3 CalculatePitchDirection()
     {
-        Vector3 pitchDir = (this.tiltTowards) ? -this.rigid.velocity : this.rigid.velocity;
+        Vector3 pitchDir = (this.tiltTowards) ? -this.rigid.linearVelocity : this.rigid.linearVelocity;
         pitchDir += Vector3.forward / tan * PlayerShip.MAX_SPEED;
         return pitchDir;
     }

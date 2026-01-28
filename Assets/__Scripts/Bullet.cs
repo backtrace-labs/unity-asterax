@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         Invoke("DestroyMe", lifeTime);
 
         // Set the velocity of the Bullet
-        GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        GetComponent<Rigidbody>().linearVelocity = transform.forward * bulletSpeed;
     }
 
     void DestroyMe()
